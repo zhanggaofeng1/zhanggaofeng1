@@ -31,6 +31,7 @@
     <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>       
     <property name="minPoolSize" value="${jdbc.minPoolSize}"/>       
     <property name="idleConnectionTestPeriod" value="${jdbc.conn_test_period}"/>
+    <property name="autoCommitOnClose" value="${jdbc.auto_commit}"/>
   </bean>
 
   <!-- jdbcTemp配置-->
