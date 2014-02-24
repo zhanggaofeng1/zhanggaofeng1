@@ -36,7 +36,6 @@ public class IndexController {
     public ModelAndView login(HttpServletRequest request, ModelMap modelMap) {
         request.getSession().setAttribute("uname", "zhang");
         ModelAndView mv = new ModelAndView("login");
-        mv.getModelMap().addAttribute("test", "test");
         return mv;
     }
 }
