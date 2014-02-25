@@ -18,6 +18,22 @@
   <context:annotation-config/>
   <context:component-scan base-package="com.num.service,com.num.dao"/>
 
+<!--   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="hibernateProperties">
+      <props>
+	<prop key="hibernate.dialect">
+	  org.hibernate.dialect.MySQLDialect
+	</prop>
+	<prop key="hibernate.show_sql">true</prop>
+	<prop key="hibernate.format_sql">true</prop>
+	<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+      </props>
+    </property>
+    <property name="packagesToScan">
+      <value>cn.ccsu.model</value>
+    </property>
+  </bean>-->
 
   <!-- c3p0数据源配置-->
   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"        

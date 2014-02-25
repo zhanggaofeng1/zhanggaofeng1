@@ -4,10 +4,7 @@
  */
 package run;
 
-import java.util.List;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
-import tab.Student;
 
 /**
  *
@@ -16,18 +13,9 @@ import tab.Student;
 public class MainService {
 
     public static void main(String[] args) {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-
-        List<Student> stus = session.createQuery("from Student as stu where stu.teaId = :tea_id")
-                .setInteger("tea_id", 201)
-                .setFirstResult(0)
-                .setMaxResults(2)
-                .list();
-
-        for (Student stu : stus) {
-            System.out.println(stu.getStuName());
-        }
-        transaction.commit();
+        // 在只有查找数据的逻辑中，不需要事务管理
+        Transaction transaction = HibernateUtil.getCurrentSession().beginTransaction();
+        BaseDao.getInstance().simpleDbOper();
+        transaction.commit();// getcurrentsession,在提交时自动关闭connection链接
     }
 }
