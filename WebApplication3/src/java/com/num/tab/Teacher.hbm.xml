@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-2-25 13:40:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.num.tab.Teacher" table="teacher" catalog="twst">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="teaId" type="int">
+            <column name="tea_id" not-null="true" />
+        </property>
+        <property name="teaName" type="string">
+            <column name="tea_name" length="30" not-null="true" />
+        </property>
+        <property name="teaTel" type="string">
+            <column name="tea_tel" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

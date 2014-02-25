@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/D:/NetBeans%207.3/WebApplication3/web/conf/dispatcher-servlet.xml</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/hibernate_cfg/hibernate.cfg.xml</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/web/WEB-INF/web.xml</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/interceptors/RequestCtrl.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/hibernate_cfg/hibernate.reveng.xml</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/service/SchoolService.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/dao/SchoolDao.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/web/page/show_student_info.jsp</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/tab/Student.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/common/HibernateService.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/src/java/com/num/action/SchoolAction.java</file>
+        <file>file:/D:/NetBeans%207.3/WebApplication3/web/conf/applicationContext.xml</file>
+    </open-files>
+</project-private>
