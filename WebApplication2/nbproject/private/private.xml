@@ -2,12 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/hibernate.cfg.xml</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/hibernate.reveng.xml</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/tab/Student.hbm.xml</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/tab/Teacher.hbm.xml</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/run/HibernateUtil.java</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/tab/Teacher.java</file>
-        <file>file:/D:/NetBeans%207.3/WebApplication2/src/java/tab/Student.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication2/src/java/run/MainService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication2/src/java/run/BaseDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication2/src/java/run/HibernateUtil.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication2/src/java/hibernate.cfg.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication2/web/index.jsp</file>
     </open-files>
 </project-private>
