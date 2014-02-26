@@ -19,7 +19,7 @@ public class HibernateService {
     @Autowired
     private HibernateTemplate hibernateTemplate;
     
-    public HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernaTemplate() {
         return hibernateTemplate;
     }
     
@@ -27,11 +27,11 @@ public class HibernateService {
         return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
     
-    public Transaction getCurrentTransaction() {
-        return getCurrentSession().beginTransaction();
+    public Session getOpenSession() {
+        return hibernateTemplate.getSessionFactory().openSession();
     }
     
-    public void currentCommit(Transaction transaction) {
-        transaction.commit();
+    public Transaction getTransaction() {
+        return getCurrentSession().beginTransaction();
     }
 }

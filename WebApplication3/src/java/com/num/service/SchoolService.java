@@ -8,7 +8,6 @@ import com.num.common.HibernateService;
 import com.num.dao.SchoolDao;
 import com.num.tab.Student;
 import java.util.List;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +24,7 @@ public class SchoolService {
     private HibernateService hibernateService;
     
     public List<Student> showStudentInfo() {
-        Transaction transaction = hibernateService.getCurrentTransaction();
-        try {
-        return schoolDao.showSchoolInfo();
-        } finally {
-            hibernateService.currentCommit(transaction);
-        }
+        return schoolDao.showSchoolInfo2();
     }
-    
-    public List<Student> setStudentInfo() {
-        return null;
-    }
-    
     
 }

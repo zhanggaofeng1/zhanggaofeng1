@@ -17,13 +17,23 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class SchoolDao {
-    
+
     @Autowired
     private HibernateService hibernateService;
-    
-    public List<Student> showSchoolInfo() {
-        Session session = hibernateService.getCurrentSession();
-        return (List<Student>)session.createQuery("from Student").list();
+
+    public List<Student> showSchoolInfo1() {
+        Session session = hibernateService.getOpenSession();
+        return (List<Student>) session.createQuery("from Student").list();
     }
-    
+
+    public List<Student> showSchoolInfo2() {
+        Session session = hibernateService.getCurrentSession();
+        Student stu = new Student();
+        stu.setStuId(5);
+        stu.setStuName("dddd111");
+        stu.setStuTel("ddddd111");
+        stu.setTeaId(1);
+        session.save(stu);
+        return session.createQuery("from Student").list();
+    }
 }

@@ -7,5 +7,7 @@
         <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/web/conf/dispatcher-servlet.xml</file>
         <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/nbproject/build-impl.xml</file>
         <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/action/SchoolAction.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/dao/SchoolDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/common/HibernateService.java</file>
     </open-files>
 </project-private>
