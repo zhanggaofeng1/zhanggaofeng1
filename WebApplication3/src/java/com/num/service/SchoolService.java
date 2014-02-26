@@ -4,7 +4,6 @@
  */
 package com.num.service;
 
-import com.num.common.HibernateService;
 import com.num.dao.SchoolDao;
 import com.num.tab.Student;
 import java.util.List;
@@ -20,11 +19,8 @@ public class SchoolService {
     
     @Autowired
     private SchoolDao schoolDao;
-    @Autowired
-    private HibernateService hibernateService;
     
     public List<Student> showStudentInfo() {
-        return schoolDao.showSchoolInfo2();
+        return schoolDao.showSchoolInfo1();
     }
-    
 }

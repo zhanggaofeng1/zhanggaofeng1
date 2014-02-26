@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,21 +17,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HibernateService {
+
     @Autowired
     private HibernateTemplate hibernateTemplate;
-    
+
     public HibernateTemplate getHibernaTemplate() {
         return hibernateTemplate;
     }
-    
+
     public Session getCurrentSession() {
         return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
-    
-    public Session getOpenSession() {
-        return hibernateTemplate.getSessionFactory().openSession();
-    }
-    
+
     public Transaction getTransaction() {
         return getCurrentSession().beginTransaction();
     }
