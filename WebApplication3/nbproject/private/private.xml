@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/service/SchoolService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/action/SchoolAction.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/web/conf/applicationContext.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/web/WEB-INF/web.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/src/java/com/num/interceptors/RequestCtrl.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/WebApplication3/web/conf/dispatcher-servlet.xml</file>
+    </open-files>
 </project-private>
