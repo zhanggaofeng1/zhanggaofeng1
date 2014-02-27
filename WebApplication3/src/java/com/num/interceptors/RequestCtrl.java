@@ -14,6 +14,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @author Administrator
  */
 public class RequestCtrl extends HandlerInterceptorAdapter {
+
     private List<String> excludeMethods;
 
     public List<String> getExcludeMethods() {
@@ -23,20 +24,20 @@ public class RequestCtrl extends HandlerInterceptorAdapter {
     public void setExcludeMethods(List<String> excludeMethods) {
         this.excludeMethods = excludeMethods;
     }
-    
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        
+
         if (excludeMethods.contains(getMethodName(request.getRequestURI()))) {
             return true;
         }
-        
+
         String uname = (String) request.getSession().getAttribute("uname");
         if (uname == null || uname.isEmpty()) {
             request.getRequestDispatcher("/page/error.jsp").forward(request, response);
             return false;
         }
-        
+
         // 还可以细化每个用户的具体权限
         return true;
     }

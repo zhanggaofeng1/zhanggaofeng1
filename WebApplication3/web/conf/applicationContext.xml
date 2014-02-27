@@ -37,6 +37,7 @@
     <property name="autoCommitOnClose" value="${jdbc.auto_commit}"/>
   </bean>
   
+  <!-- session工厂配置-->
   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
     <property name="dataSource" ref="dataSource"></property>
     <property name="hibernateProperties">
@@ -53,10 +54,12 @@
     </property>
   </bean>
   
+  <!-- hibernate模板配置-->
   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
     <constructor-arg ref="sessionFactory" />
   </bean>
 
+  <!-- hibernate事务管理 -->
   <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
@@ -65,14 +68,14 @@
   <tx:advice id="txAdvice" transaction-manager="transactionManager">
     <tx:attributes>
       <tx:method name="add*" propagation="REQUIRED" />
-      <tx:method name="delete*" propagation="REQUIRED" />
+      <tx:method name="save*" propagation="REQUIRED" />
+      <tx:method name="del*" propagation="REQUIRED" />
       <tx:method name="update*" propagation="REQUIRED" />
-      <tx:method name="*" propagation="SUPPORTS" read-only="true" />
+      <tx:method name="*" propagation="REQUIRED" read-only="true" />
     </tx:attributes>
   </tx:advice>
   <aop:config>
     <aop:pointcut id="tranPointcut" expression="execution(* com.num.service.*.*(..))" />
     <aop:advisor advice-ref="txAdvice" pointcut-ref="tranPointcut" />
   </aop:config>
-
 </beans>

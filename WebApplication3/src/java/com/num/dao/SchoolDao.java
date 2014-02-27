@@ -29,7 +29,13 @@ public class SchoolDao {
         return hibernateService.getHibernaTemplate().find("from Student");
     }
 
+    public boolean addStudent(Student stu) {
+        this.hibernateService.getHibernaTemplate().save(stu);
+        return true;
+    }
+
     public List<Student> showSchoolInfo1() {
+
         HibernateTemplate hibernateTemplate = hibernateService.getHibernaTemplate();
         return hibernateTemplate.executeFind(new HibernateCallback() {
             @Override
@@ -41,7 +47,7 @@ public class SchoolDao {
 
     public List<Student> showSchoolInfo2() {
         HibernateTemplate hibernateTemplate = hibernateService.getHibernaTemplate();
-        return hibernateTemplate.execute(new HibernateCallback<List<Student>>(){
+        return hibernateTemplate.execute(new HibernateCallback<List<Student>>() {
             @Override
             public List<Student> doInHibernate(Session sn) throws HibernateException, SQLException {
                 return sn.createQuery("from Student").list();
