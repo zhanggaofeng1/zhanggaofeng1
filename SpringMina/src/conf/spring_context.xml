@@ -10,24 +10,17 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-  <bean id="propertyConfigurer"
-	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-	p:location="/props/conf.properties" />
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:locations="/props/*.properties"/>
 
-  <!--spring 注解扫描-->
-  <context:annotation-config/>
-  <context:component-scan base-package="com.num.service,com.num.dao"/>
-  <!--启动引导类-->
-  <bean id="gameServie" class="com.num.main.GameService"/>
+    <!--spring 注解扫描-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.num.*.service,com.num.*.dao"/>
+    <!--启动引导类-->
+    <bean id="gameServie" class="com.num.main.GameService"/>
+  
+    <import resource="./spring_mina_cfg.xml"/>
+    <import resource="./database_cfg.xml"/>
 
-
-
-
-
-
-
-
-
-
-  <import resource="./database_cfg.xml"/>
 </beans>

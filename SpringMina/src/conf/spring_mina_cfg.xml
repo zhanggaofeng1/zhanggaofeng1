@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    
+    <!--Mina配置-->
+    <!--handler-->
+    <bean id="minaHandler" class="com.num.mina.handler.GameHandlerService" />
+    <!--filter-->
+    <bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter">
+        <constructor-arg value="${game.core.thread.pool}" />
+        <constructor-arg value="${game.max.thread.pool}" />
+    </bean>
+    <bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+    <bean id="mdcInjectionFilter" class="org.apache.mina.filter.logging.MdcInjectionFilter">
+        <constructor-arg value="remoteAddress" />
+    </bean>
+    <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+        <constructor-arg>
+            <bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory"></bean>
+        </constructor-arg>
+    </bean>
+    <bean id="filterChainBuilder" class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+        <property name="filters">
+            <map>
+                <entry key="mdcInjectionFilter" value-ref="mdcInjectionFilter"/>
+                <entry key="loggingFilter" value-ref="loggingFilter" />
+                <entry key="codecFilter" value-ref="codecFilter" />
+                <entry key="executor" value-ref="executorFilter" />
+            </map>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="java.net.SocketAddress">
+                    <bean class="org.apache.mina.integration.beans.InetSocketAddressEditor" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor" init-method="bind" destroy-method="unbind">
+        <property name="defaultLocalAddress" value=":${game.port}" />
+        <property name="filterChainBuilder" ref="filterChainBuilder" />
+<!--        <property name="config">
+            <bean class="org.apache.mina.transport.socket.nio.NioSocketSession.SessionConfigImpl">
+                <property name="useReadOperation" value="${game.use.read.oper}"/>
+                <property name="idleTimeForBoth" value="${game.idle.both.time}"/>
+                <property name="writeTimeout" value="${game.write.timeout}"/>
+            </bean>
+        </property>-->
+        <property name="handler" ref="minaHandler" />
+        <property name="reuseAddress" value="true" />
+    </bean>
+
+</beans>

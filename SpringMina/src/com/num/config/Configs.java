@@ -9,5 +9,5 @@ package com.num.config;
  * @author Administrator
  */
 public class Configs {
-    public static final String spring_cfg_path = "/conf/spring_server.xml";
+    public static final String spring_cfg_path = "/conf/spring_context.xml";
 }

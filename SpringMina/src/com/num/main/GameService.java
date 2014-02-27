@@ -7,42 +7,41 @@ package com.num.main;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.num.config.Configs;
-import com.num.service.ShutdownService;
+import com.num.shutdown.service.ShutdownService;
+import com.num.start.service.StartService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Administrator
  */
 public class GameService {
-    
+
+    @Autowired
+    private StartService startService;
+    @Autowired
+    private ShutdownService shutdownService;
+
     public static void main(String... args) {
         ApplicationContext context = new ClassPathXmlApplicationContext(Configs.spring_cfg_path);
         GameService gameService = context.getBean(GameService.class);
         gameService.startGame();
-        gameService.endGame(context);
+        gameService.shutdownGame();
     }
-    
+
+    // 启动服务器调用
     public void startGame() {
-    
+        startService.startGame();
     }
     
-    public void endGame(final ApplicationContext context) {
-        Runtime rt = Runtime.getRuntime();
-        rt.addShutdownHook(new Thread(new ShutdownOper(context)));
+    // 关闭服务器调用
+    public void shutdownGame() {
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                shutdownService.shutdown();
+            }
+        }));
     }
     
-    public class ShutdownOper implements Runnable{
-        
-        private ApplicationContext context;
-        
-        public ShutdownOper(final ApplicationContext context) {
-            this.context = context;
-        }
-        
-        @Override
-        public void run() {
-            ShutdownService shutService = context.getBean(ShutdownService.class);
-            shutService.shutdown();
-        }
-    }
 }
