@@ -4,7 +4,7 @@
  */
 package com.num.action;
 
-import com.num.common.CdLv;
+import com.num.common.Student;
 import com.num.service.TestService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.portlet.ModelAndView;
 
 /**
@@ -24,12 +25,12 @@ public class IndexController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping("/showLvInfo.do")
+    @ResponseBody
+    @RequestMapping("/showInfo.do")
     public String lvInfo(HttpServletRequest request, ModelMap modelMap) {
-        String lv = request.getParameter("lv");
-        List<CdLv> lvInfo = testService.showLvInfo(lv);
+        List<Student> lvInfo = testService.showLvInfo();
         modelMap.addAttribute("info", lvInfo);
-        return "login";
+        return "index";
     }
 
     @RequestMapping("/login.do")

@@ -18,23 +18,6 @@
   <context:annotation-config/>
   <context:component-scan base-package="com.num.service,com.num.dao"/>
 
-<!--   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-    <property name="dataSource" ref="dataSource"></property>
-    <property name="hibernateProperties">
-      <props>
-	<prop key="hibernate.dialect">
-	  org.hibernate.dialect.MySQLDialect
-	</prop>
-	<prop key="hibernate.show_sql">true</prop>
-	<prop key="hibernate.format_sql">true</prop>
-	<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
-      </props>
-    </property>
-    <property name="packagesToScan">
-      <value>cn.ccsu.model</value>
-    </property>
-  </bean>-->
-
   <!-- c3p0数据源配置-->
   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"        
 	destroy-method="close">
@@ -59,5 +42,20 @@
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <constructor-arg ref="dataSource" />
   </bean>
+  
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="save*" propagation="REQUIRED"/>
+      <tx:method name="add*" propagation="REQUIRED"/>
+      <tx:method name="del*" propagation="REQUIRED"/>
+      <tx:method name="update*" propagation="REQUIRED"/>
+      <tx:method name="*" propagation="REQUIRED" read-only="true"/>
+    </tx:attributes>
+  </tx:advice>
+
+  <aop:config>
+    <aop:pointcut id="allserviceMethod" expression="execution(* com.num.service.*.*(..))" />
+    <aop:advisor pointcut-ref="allserviceMethod" advice-ref="txAdvice" />
+  </aop:config>
 
 </beans>
