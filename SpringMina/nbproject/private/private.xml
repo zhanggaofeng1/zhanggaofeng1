@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
         <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/main/GameService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/factory/GameProtoCodecFactory.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/handler/GameHandlerService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/props/db_conf.properties</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoEncoder.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoDecoder.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/spring_context.xml</file>
         <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/database_cfg.xml</file>
-        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/spring_server.xml</file>
-        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/service/ShutdownService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/spring_mina_cfg.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/props/mina_conf.properties</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/start/service/StartService.java</file>
     </open-files>
 </project-private>

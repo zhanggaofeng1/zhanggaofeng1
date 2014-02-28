@@ -10,15 +10,9 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
     
-    <!--Mina配置-->
     <!--handler-->
     <bean id="minaHandler" class="com.num.mina.handler.GameHandlerService" />
-    <!--filter-->
-    <bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter">
-        <constructor-arg value="${game.core.thread.pool}" />
-        <constructor-arg value="${game.max.thread.pool}" />
-    </bean>
-    <bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+    <!--codec filter-->
     <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
         <constructor-arg>
             <bean class="com.num.mina.codec.factory.GameProtoCodecFactory">
