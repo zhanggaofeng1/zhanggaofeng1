@@ -36,5 +36,6 @@ public class GameHandlerService extends IoHandlerAdapter{
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
+        System.out.println("############## rec ######################");
     }
 }

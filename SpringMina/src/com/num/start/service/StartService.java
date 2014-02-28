@@ -11,6 +11,8 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +23,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class StartService {
     
+    private static final Logger log = LoggerFactory.getLogger(StartService.class);
     @Autowired
     private NioSocketAcceptor ioAcceptor;
     @Autowired
     private GameHandlerService minaHandler;
     @Autowired
-    private LoggingFilter loggingFilter;
-    @Autowired
     private ProtocolCodecFilter protoCodecFilter;
-    @Autowired
-    private ExecutorFilter executorFilter;
     
     public void startGame() {
         
@@ -40,9 +39,9 @@ public class StartService {
             ioAcceptor.getSessionConfig().setUseReadOperation(Configs.game_session_read_oper);
             ioAcceptor.getSessionConfig().setWriteTimeout(Configs.game_write_timeout);
             
-            ioAcceptor.getFilterChain().addLast("logger", loggingFilter);
+            ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
             ioAcceptor.getFilterChain().addLast("codec", protoCodecFilter);
-            ioAcceptor.getFilterChain().addLast("executor", executorFilter);
+            ioAcceptor.getFilterChain().addLast("executor", new ExecutorFilter(Configs.game_core_pool_size, Configs.game_max_pool_size));
             
             ioAcceptor.setHandler(minaHandler);
             ioAcceptor.bind();
@@ -50,6 +49,6 @@ public class StartService {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        System.out.println("##################服务器启动已完成########################");
+        log.debug("##################服务器启动已完成########################");
     }
 }

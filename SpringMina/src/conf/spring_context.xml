@@ -4,23 +4,26 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-    <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:locations="/props/*.properties"/>
+  <bean id="propertyConfigurer"
+	  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+	  p:locations="/props/*.properties"/>
 
-    <!--spring 注解扫描-->
-    <context:annotation-config/>
-    <context:component-scan base-package="com.num.*.service,com.num.*.dao"/>
-    <!--启动引导类-->
-    <bean id="gameServie" class="com.num.main.GameService"/>
-  
-    <import resource="./spring_mina_cfg.xml"/>
-    <import resource="./database_cfg.xml"/>
+  <!--@Async-->
+  <task:annotation-driven /> 
+  <!--spring 注解扫描-->
+  <context:annotation-config/>
+  <context:component-scan base-package="com.num.*.service,com.num.*.dao"/>
+  <!--启动引导类-->
+  <bean id="gameServie" class="com.num.main.GameService"/>
+  <import resource="./spring_mina_cfg.xml"/>
+  <import resource="./database_cfg.xml"/>
 
 </beans>
