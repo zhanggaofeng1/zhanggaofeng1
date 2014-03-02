@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.shutdown.service;
+package com.num.main.service;
 
 import org.springframework.stereotype.Service;
 

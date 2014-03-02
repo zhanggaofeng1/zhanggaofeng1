@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.mina.codec.factory;
+package com.num.mina.factory;
 
 import com.num.mina.codec.GameProtoDecoder;
 import com.num.mina.codec.GameProtoEncoder;

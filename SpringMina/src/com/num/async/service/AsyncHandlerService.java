@@ -14,8 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class AsyncHandlerService {
     
+    
+    public void test() {
+    
+        async_test();
+    }
+    
     @Async
     public void async_test() {
-    
+        
     }
 }

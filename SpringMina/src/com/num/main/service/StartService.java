@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.start.service;
+package com.num.main.service;
 
 import com.num.config.Configs;
 import com.num.mina.handler.GameHandlerService;
@@ -38,17 +38,17 @@ public class StartService {
             ioAcceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, Configs.game_idle_both_time);
             ioAcceptor.getSessionConfig().setUseReadOperation(Configs.game_session_read_oper);
             ioAcceptor.getSessionConfig().setWriteTimeout(Configs.game_write_timeout);
+            ioAcceptor.getSessionConfig().setTcpNoDelay(true);
+            ioAcceptor.setReuseAddress(true);
             
             ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
             ioAcceptor.getFilterChain().addLast("codec", protoCodecFilter);
             ioAcceptor.getFilterChain().addLast("executor", new ExecutorFilter(Configs.game_core_pool_size, Configs.game_max_pool_size));
-            
             ioAcceptor.setHandler(minaHandler);
             ioAcceptor.bind();
             
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        log.debug("##################服务器启动已完成########################");
     }
 }

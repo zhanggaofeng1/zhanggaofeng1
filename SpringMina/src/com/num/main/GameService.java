@@ -7,8 +7,8 @@ package com.num.main;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.num.config.Configs;
-import com.num.shutdown.service.ShutdownService;
-import com.num.start.service.StartService;
+import com.num.main.service.ShutdownService;
+import com.num.main.service.StartService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

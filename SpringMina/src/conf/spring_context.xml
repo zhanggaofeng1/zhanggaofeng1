@@ -21,9 +21,12 @@
   <!--spring 注解扫描-->
   <context:annotation-config/>
   <context:component-scan base-package="com.num.*.service,com.num.*.dao"/>
-  <!--启动引导类-->
-  <bean id="gameServie" class="com.num.main.GameService"/>
   <import resource="./spring_mina_cfg.xml"/>
   <import resource="./database_cfg.xml"/>
+  <!--启动引导类-->
+  <bean id="gameServie" class="com.num.main.GameService"/>
+
+   <!--注册协议-->
+  <bean id="registerProtoService" class="com.num.proto.service.RegisterProtoService" init-method="init" />
 
 </beans>

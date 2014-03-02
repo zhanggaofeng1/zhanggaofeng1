@@ -15,7 +15,7 @@
     <!--codec filter-->
     <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
         <constructor-arg>
-            <bean class="com.num.mina.codec.factory.GameProtoCodecFactory">
+            <bean class="com.num.mina.factory.GameProtoCodecFactory">
 	      <constructor-arg type="java.lang.String" value="utf8" />
 	    </bean>
         </constructor-arg>
