@@ -4,7 +4,7 @@
  */
 package com.num.player.service;
 
-import com.num.mina.util.GsSession;
+import com.num.mina.vo.GsSession;
 import com.num.player.dao.SavePlayerDao;
 import com.num.player.vo.Player;
 import com.num.proto.req.AbstReqProto;

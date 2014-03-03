@@ -5,7 +5,7 @@
 package com.num.player.service;
 
 import com.num.enums.RespState;
-import com.num.mina.util.GsSession;
+import com.num.mina.vo.GsSession;
 import com.num.mina.util.SendMsgTool;
 import com.num.player.vo.Player;
 import com.num.player.dao.LoadPlayerDao;

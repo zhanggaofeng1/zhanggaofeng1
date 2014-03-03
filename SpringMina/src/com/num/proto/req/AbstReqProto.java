@@ -4,7 +4,7 @@
  */
 package com.num.proto.req;
 
-import com.num.mina.util.GsSession;
+import com.num.mina.vo.GsSession;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.springframework.context.ApplicationContext;
 

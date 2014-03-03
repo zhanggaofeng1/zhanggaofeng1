@@ -4,7 +4,7 @@
  */
 package com.num.mina.handler;
 
-import com.num.mina.util.GsSession;
+import com.num.mina.vo.GsSession;
 import com.num.mina.util.SendMsgTool;
 import com.num.player.service.PlayerService;
 import com.num.proto.req.AbstReqProto;

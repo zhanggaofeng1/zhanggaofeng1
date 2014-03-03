@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.mina.util;
+package com.num.mina.vo;
 
 import com.num.player.vo.Player;
 import org.apache.mina.core.session.IoSession;

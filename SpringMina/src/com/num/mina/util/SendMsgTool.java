@@ -4,6 +4,7 @@
  */
 package com.num.mina.util;
 
+import com.num.mina.vo.GsSession;
 import com.num.proto.resp.AbstResp;
 
 /**
