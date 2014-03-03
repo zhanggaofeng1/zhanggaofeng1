@@ -10,7 +10,7 @@ package com.num.config;
  */
 public class Configs {
     public static final String spring_cfg_path = "/conf/spring_context.xml";
-    public static final String log4j_cfg_path = "src/log4j_conf/log4j.properties";
+    public static final String log4j_cfg_path = "src/log4j_props/log4j.properties";
     public static final int game_idle_both_time = 10;
     public static final int game_write_timeout = 10;
     public static final boolean game_session_read_oper = true;
