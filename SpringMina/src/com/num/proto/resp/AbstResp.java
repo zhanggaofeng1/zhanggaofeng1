@@ -5,19 +5,23 @@
 package com.num.proto.resp;
 
 import org.apache.mina.core.buffer.IoBuffer;
-import org.apache.mina.core.session.IoSession;
 
 /**
  *
  * @author Administrator
  */
 public abstract class AbstResp {
+    private short protoId;
 
-    protected IoBuffer buf = IoBuffer.allocate(100).setAutoExpand(true);
-    public abstract void writer();
-    public void sendMsg(IoSession session) {
-        session.write(buf.buf());
-    } 
+    public short getProtoId() {
+        return protoId;
+    }
+
+    public void setProtoId(short protoId) {
+        this.protoId = protoId;
+    }
+    
+    public abstract void writer(IoBuffer buf);
     
     protected void writeByte(IoBuffer buf, int value) {
         buf.put((byte)value);

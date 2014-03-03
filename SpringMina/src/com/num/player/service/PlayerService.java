@@ -4,6 +4,7 @@
  */
 package com.num.player.service;
 
+import com.num.player.dao.SavePlayerDao;
 import com.num.player.vo.Player;
 import com.num.proto.req.AbstReqProto;
 import javolution.util.FastMap;
@@ -26,6 +27,8 @@ public class PlayerService {
     private FastMap<Integer, Player> players = new FastMap<Integer, Player>().setShared(true);
     @Autowired
     private ApplicationContext context;
+    @Autowired
+    private SavePlayerDao savePlayerDao;
 
     public void init(AbstReqProto reqPto, IoSession session) {
         reqPto.init(session, getPlayer(session), context);
@@ -42,10 +45,22 @@ public class PlayerService {
     private Integer getPlayerId(IoSession session) {
         return (Integer) session.getAttribute(sessionKey);
     }
-    
+
     public boolean addPlayer(Player player) {
         players.put(player.getId(), player);
         player.getSession().setAttribute(sessionKey, player.getId());
         return true;
+    }
+
+    public boolean removePlayer(IoSession session) {
+        Integer id = getPlayerId(session);
+        if (id == null || id <= 0) {
+            return true;
+        }
+        if (!players.containsKey(id)) {
+            return true;
+        }
+        Player player = players.remove(id);
+        return savePlayerDao.savePlayer(player);
     }
 }

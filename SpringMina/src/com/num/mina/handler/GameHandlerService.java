@@ -4,9 +4,9 @@
  */
 package com.num.mina.handler;
 
-import com.num.player.service.LoginService;
 import com.num.player.service.PlayerService;
 import com.num.proto.req.AbstReqProto;
+import com.num.proto.resp.AbstResp;
 import com.num.proto.service.RegisterProtoService;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -27,7 +27,7 @@ public class GameHandlerService extends IoHandlerAdapter {
     private RegisterProtoService registerPtoService;
     @Autowired
     private PlayerService playerService;
-    
+
     @Override
     public void sessionOpened(IoSession session) throws Exception {
         log.debug("############# session opened ###################");
@@ -35,7 +35,7 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        log.debug("############# session closed ###################");
+        playerService.removePlayer(session);
     }
 
     @Override
@@ -49,20 +49,31 @@ public class GameHandlerService extends IoHandlerAdapter {
     }
 
     @Override
-    public void messageReceived(IoSession session, Object message) throws Exception {
+    public void messageSent(IoSession session, Object message) throws Exception {
         
+        AbstResp resp = (AbstResp)message;
+        Short protoId = registerPtoService.getRespProtoIdByClazz(resp.getClass());
+        if (protoId == null || protoId <= 0) {
+            log.error("resp : 协议名字：" + resp.getClass().getName() + " 的协议没有注册");
+            return ;
+        }
+        resp.setProtoId(protoId);
+        session.write(resp);
+    }
+
+    @Override
+    public void messageReceived(IoSession session, Object message) throws Exception {
+
         IoBuffer buf = (IoBuffer) message;
         short protoId = buf.getShort();
         Class<? extends AbstReqProto> protoClazz = registerPtoService.getReqProtoById(protoId);
         if (protoClazz == null) {
-            log.error("协议id = " + protoId + " 的协议没有注册！");
-            return ;
+            log.error("req : 协议id = " + protoId + " 的协议没有注册！");
+            return;
         }
         AbstReqProto proto = protoClazz.newInstance();
         playerService.init(proto, session);
         proto.reader(buf);
         proto.req_handler();
     }
-    
-   
 }

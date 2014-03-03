@@ -19,11 +19,11 @@ public class Player {
     private int playerLv;
     private int playerVip;
 
-    public IoSession getSession() {
+    public final IoSession getSession() {
         return session;
     }
 
-    public void setSession(IoSession session) {
+    public void setSession(final IoSession session) {
         this.session = session;
     }
 
@@ -31,7 +31,7 @@ public class Player {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
     

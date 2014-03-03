@@ -6,6 +6,7 @@ package com.num.proto.service;
 
 import com.num.proto.req.AbstReqProto;
 import com.num.proto.req.impl.ReqLoginProto;
+import com.num.proto.resp.impl.ResultState;
 import javolution.util.FastMap;
 
 /**
@@ -40,5 +41,6 @@ public class RegisterProtoService {
 
     // 发送协议注册
     private void respProClassRegister() {
+        respProMap.put(ResultState.class, (short)0x1);
     }
 }

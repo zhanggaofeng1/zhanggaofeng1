@@ -5,6 +5,7 @@
 package com.num.proto.resp.impl;
 
 import com.num.proto.resp.AbstResp;
+import org.apache.mina.core.buffer.IoBuffer;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ResultState extends AbstResp{
     }
 
     @Override
-    public void writer() {
+    public void writer(IoBuffer buf) {
         this.writeInt(buf, state);
     }
 }
