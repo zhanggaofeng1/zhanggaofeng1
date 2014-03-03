@@ -4,9 +4,12 @@
  */
 package com.num.mina.handler;
 
+import com.num.mina.util.GsSession;
+import com.num.mina.util.SendMsgTool;
 import com.num.player.service.PlayerService;
 import com.num.proto.req.AbstReqProto;
 import com.num.proto.resp.AbstResp;
+import com.num.proto.resp.impl.ResultState;
 import com.num.proto.service.RegisterProtoService;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -41,6 +44,7 @@ public class GameHandlerService extends IoHandlerAdapter {
     @Override
     public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
         log.debug("############# session idle ###################");
+        SendMsgTool.sendMsg(new GsSession(session), new ResultState(1000));
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ReqLoginProto extends AbstReqProto{
     @Override
     public void req_handler() {
         LoginService loginService = getContext().getBean(LoginService.class);
-        loginService.playerLogin(getIoSessioin(), playerId);
+        loginService.playerLogin(getGsSessioin(), playerId);
     }
     
 }

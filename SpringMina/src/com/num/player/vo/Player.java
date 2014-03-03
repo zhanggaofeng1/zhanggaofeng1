@@ -4,7 +4,7 @@
  */
 package com.num.player.vo;
 
-import org.apache.mina.core.session.IoSession;
+import com.num.mina.util.GsSession;
 
 /**
  *
@@ -12,18 +12,22 @@ import org.apache.mina.core.session.IoSession;
  */
 public class Player {
 
-    private IoSession session;
+    private GsSession session;
     private int id;
     private int playerId;
     private int playerName;
     private int playerLv;
     private int playerVip;
+    
+    public void addAttr(Object key, Object value) {
+        session.addAttr(key, value);
+    }
 
-    public final IoSession getSession() {
+    public final GsSession getGsSession() {
         return session;
     }
 
-    public void setSession(final IoSession session) {
+    public void setSession(GsSession session) {
         this.session = session;
     }
 

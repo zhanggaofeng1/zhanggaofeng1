@@ -5,19 +5,13 @@
 package com.num.mina.util;
 
 import com.num.proto.resp.AbstResp;
-import org.apache.mina.core.session.IoSession;
 
 /**
  *
  * @author Administrator
  */
 public class SendMsgTool {
-
-    public static void sendMsg(IoSession session, AbstResp resp) {
-        try {
-            session.getHandler().messageSent(session, resp);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public static void sendMsg(GsSession session, AbstResp resp) {
+            session.sendMessage(resp);
     }
 }

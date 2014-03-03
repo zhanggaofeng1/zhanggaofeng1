@@ -10,7 +10,7 @@ package com.num.enums;
  */
 public enum RespState {
 
-    login_error(1),
+    login_error(-100),
     login_success(2),
     ;
     private int value;

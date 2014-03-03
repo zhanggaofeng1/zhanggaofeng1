@@ -4,6 +4,7 @@
  */
 package com.num.player.service;
 
+import com.num.mina.util.GsSession;
 import com.num.player.dao.SavePlayerDao;
 import com.num.player.vo.Player;
 import com.num.proto.req.AbstReqProto;
@@ -31,7 +32,11 @@ public class PlayerService {
     private SavePlayerDao savePlayerDao;
 
     public void init(AbstReqProto reqPto, IoSession session) {
-        reqPto.init(session, getPlayer(session), context);
+        reqPto.init(getGsSession(session), getPlayer(session), context);
+    }
+    
+    private GsSession getGsSession(IoSession session) {
+        return new GsSession(session);
     }
 
     private Player getPlayer(IoSession session) {
@@ -48,7 +53,7 @@ public class PlayerService {
 
     public boolean addPlayer(Player player) {
         players.put(player.getId(), player);
-        player.getSession().setAttribute(sessionKey, player.getId());
+        player.getGsSession().addAttr(sessionKey, player.getId());
         return true;
     }
 

@@ -5,11 +5,11 @@
 package com.num.player.service;
 
 import com.num.enums.RespState;
+import com.num.mina.util.GsSession;
 import com.num.mina.util.SendMsgTool;
 import com.num.player.vo.Player;
 import com.num.player.dao.LoadPlayerDao;
 import com.num.proto.resp.impl.ResultState;
-import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class LoginService {
     @Autowired
     private PlayerService playerService;
 
-    public void playerLogin(IoSession session, int playerId) {
+    public void playerLogin(GsSession session, int playerId) {
 
         Player player = loadPlayerDao.loadPlayer(playerId);
         if (player == null) {
@@ -36,10 +36,8 @@ public class LoginService {
             SendMsgTool.sendMsg(session, new ResultState(RespState.login_error.value()));
             return;
         }
-
         player.setSession(session);
         playerService.addPlayer(player);
-
         SendMsgTool.sendMsg(session, new ResultState(RespState.login_success.value()));
     }
 }

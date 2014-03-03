@@ -4,9 +4,9 @@
  */
 package com.num.proto.req;
 
+import com.num.mina.util.GsSession;
 import com.num.player.vo.Player;
 import org.apache.mina.core.buffer.IoBuffer;
-import org.apache.mina.core.session.IoSession;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -17,26 +17,26 @@ public abstract class AbstReqProto {
 
     private Player player;
     private ApplicationContext context;
-    private IoSession session;
+    private GsSession session;
     
     public abstract void reader(IoBuffer buf);
     public abstract void req_handler();
     
-    public void init(IoSession session, Player player, ApplicationContext context) {
+    public void init(GsSession session, Player player, ApplicationContext context) {
         this.session = session;
         this.player = player;
         this.context = context;
     }
     
-    public IoSession getIoSessioin() {
+    public final GsSession getGsSessioin() {
         return session;
     }
     
-    public ApplicationContext getContext() {
+    public final ApplicationContext getContext() {
         return context;
     }
     
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
     

@@ -29,6 +29,7 @@ public class GameProtoEncoder extends ProtocolEncoderAdapter {
 
     @Override
     public void encode(IoSession session, Object o, ProtocolEncoderOutput out) throws Exception {
+        
         AbstResp resp = (AbstResp)o;
         IoBuffer buf = IoBuffer.allocate(100).setAutoExpand(true);
         buf.putInt(0);
