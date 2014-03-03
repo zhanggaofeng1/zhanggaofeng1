@@ -26,7 +26,4 @@
   <!--启动引导类-->
   <bean id="gameServie" class="com.num.main.GameService"/>
 
-   <!--注册协议-->
-  <bean id="registerProtoService" class="com.num.proto.service.RegisterProtoService" init-method="init" />
-
 </beans>
