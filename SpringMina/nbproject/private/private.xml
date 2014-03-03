@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoEncoder.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoDecoder.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/factory/GameProtoCodecFactory.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/spring_mina_cfg.xml</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/main/service/StartService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/config/Configs.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/spring_context.xml</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/service/RegisterProtoService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/impl/ReqLoginProto.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/LoginService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/AbstReqProto.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/async/service/AsyncHandlerService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/dao/LoadPlayerDao.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/database_cfg.xml</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/vo/Player.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/PlayerService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/handler/GameHandlerService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/resp/impl/ResultState.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/resp/AbstResp.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/main/GameService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/util/SendMsgTool.java</file>
+    </open-files>
 </project-private>
