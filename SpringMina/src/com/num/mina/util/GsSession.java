@@ -4,6 +4,7 @@
  */
 package com.num.mina.util;
 
+import com.num.player.vo.Player;
 import org.apache.mina.core.session.IoSession;
 
 /**
@@ -11,14 +12,19 @@ import org.apache.mina.core.session.IoSession;
  * @author Administrator
  */
 public class GsSession {
+    private static final String playerKey = "player_obj";
     private IoSession session;
 
     public GsSession(IoSession session) {
         this.session = session;
     }
     
-    public void addAttr(Object key, Object value) {
-        session.setAttribute(key, value);
+    public void addPlayer(Player player) {
+        session.setAttribute(playerKey, player);
+    }
+    
+    public Player getPlayer() {
+        return (Player)session.getAttribute(playerKey);
     }
     
     public void sendMessage(Object obj) {

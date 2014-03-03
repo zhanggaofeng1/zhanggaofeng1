@@ -38,7 +38,7 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        playerService.removePlayer(session);
+        playerService.removePlayer(new GsSession(session));
     }
 
     @Override

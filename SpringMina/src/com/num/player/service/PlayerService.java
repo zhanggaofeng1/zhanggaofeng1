@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 public class PlayerService {
 
     private static final Logger log = LoggerFactory.getLogger(LoginService.class);
-    private static final String sessionKey = "playerId";
     private FastMap<Integer, Player> players = new FastMap<Integer, Player>().setShared(true);
     @Autowired
     private ApplicationContext context;
@@ -32,40 +31,26 @@ public class PlayerService {
     private SavePlayerDao savePlayerDao;
 
     public void init(AbstReqProto reqPto, IoSession session) {
-        reqPto.init(getGsSession(session), getPlayer(session), context);
+        reqPto.init(new GsSession(session), context);
     }
     
-    private GsSession getGsSession(IoSession session) {
-        return new GsSession(session);
-    }
-
-    private Player getPlayer(IoSession session) {
-        Integer playerId = getPlayerId(session);
-        if (playerId == null || playerId <= 0) {
-            return null;
-        }
-        return players.get(playerId);
-    }
-
-    private Integer getPlayerId(IoSession session) {
-        return (Integer) session.getAttribute(sessionKey);
-    }
-
     public boolean addPlayer(Player player) {
         players.put(player.getId(), player);
-        player.getGsSession().addAttr(sessionKey, player.getId());
         return true;
     }
 
-    public boolean removePlayer(IoSession session) {
-        Integer id = getPlayerId(session);
-        if (id == null || id <= 0) {
+    public boolean removePlayer(GsSession session) {
+        Player player = session.getPlayer();
+        if (player == null) {
+            log.error("用户session中已经没有玩家对象，不能删除队列中的player对象了！！！");
+            return false;
+        }
+        
+        if (!players.containsKey(player.getId())) {
             return true;
         }
-        if (!players.containsKey(id)) {
-            return true;
-        }
-        Player player = players.remove(id);
+        
+        players.remove((Integer)player.getId());
         return savePlayerDao.savePlayer(player);
     }
 }

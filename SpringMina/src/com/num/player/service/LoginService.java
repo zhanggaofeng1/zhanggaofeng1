@@ -36,7 +36,7 @@ public class LoginService {
             SendMsgTool.sendMsg(session, new ResultState(RespState.login_error.value()));
             return;
         }
-        player.setSession(session);
+        session.addPlayer(player);
         playerService.addPlayer(player);
         SendMsgTool.sendMsg(session, new ResultState(RespState.login_success.value()));
     }
