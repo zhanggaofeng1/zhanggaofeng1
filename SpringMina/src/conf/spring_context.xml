@@ -37,7 +37,7 @@
   </bean>
   <!--RMI远程调用配置-->
   <bean id="localRmiService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-      <property name="serviceUrl" value="${rmi.ip}:${rmi.port}/${rmi.serviceName}">
+      <property name="serviceUrl" value="rmi://${rmi.ip}:${rmi.port}/${rmi.serviceName}">
       <property name="serviceInterface" value="com.num.rmi.call.IRmiCallService" />
   </bean>
 
