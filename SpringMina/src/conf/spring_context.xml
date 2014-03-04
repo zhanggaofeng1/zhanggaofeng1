@@ -25,5 +25,20 @@
   <import resource="./database_cfg.xml"/>
   <!--启动引导类-->
   <bean id="gameServie" class="com.num.main.GameService"/>
+  
+  <!--RMI Service 配置-->
+  <bean id = "rmiService" class="com.num.rmi.impl.RemoteRmiService" />
+  <bean id="remoteRmiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+      <property name="serviceName" value="remoteService" />
+      <property name="service" ref="rmiService" />
+      <property name="serviceInterface" value="com.num.rmi.IRmiService" />
+      <property name="registryPort" value="${register.port}" />
+      <property name="registryHost" value="${register.host}" />
+  </bean>
+  <!--RMI远程调用配置-->
+  <bean id="localRmiService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+      <property name="serviceUrl" value="${rmi.ip}:${rmi.port}/${rmi.serviceName}">
+      <property name="serviceInterface" value="com.num.rmi.call.IRmiCallService" />
+  </bean>
 
 </beans>
