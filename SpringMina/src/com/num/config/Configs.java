@@ -16,4 +16,5 @@ public class Configs {
     public static final boolean game_session_read_oper = true;
     public static final int game_core_pool_size = 200;
     public static final int game_max_pool_size = 250;
+    public static final String game_rmi_hostname = "localhost";
 }
