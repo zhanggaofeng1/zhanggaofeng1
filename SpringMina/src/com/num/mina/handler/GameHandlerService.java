@@ -49,6 +49,7 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+        session.close(true);
         cause.printStackTrace();
     }
 
