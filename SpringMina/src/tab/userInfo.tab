@@ -1,0 +1,6 @@
+id	num	name	pwd	itemids	gg
+int	string	string	string	int[]	int2
+1	1111	张高峰	1234	1,2,3	1:2
+2	####	####	3453	####	####
+3	3333	大的	3939	####	####
+4	4444	都是	####	####	####

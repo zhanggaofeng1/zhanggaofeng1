@@ -28,9 +28,8 @@ public class GameService {
     private ShutdownService shutdownService;
 
     static {
-        
+
         try {
-            System.setProperty("java.rmi.server.hostname", Configs.game_rmi_hostname);
             Properties props = new Properties();
             props.load(new FileInputStream(Configs.log4j_cfg_path));
             PropertyConfigurator.configure(props);
