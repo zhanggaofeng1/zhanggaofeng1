@@ -4,28 +4,37 @@
  */
 package com.num.act.vo;
 
-import javolution.util.FastMap;
-
 /**
  *
  * @author Administrator
  */
-public class LoginActVo extends AbstActVo{
-    
+public class LoginActVo extends AbstActVo {
+
     private int day;
     private int count;
     private String say = "Hello world";
 
-    @Override
-    public FastMap<String, Object> saveToDb(FastMap<String, Object> saveMap) {
-        saveMap.put("day", day);
-        saveMap.put("count", count);
-        saveMap.put("say", say);
-        return saveMap;
+    public int getDay() {
+        return day;
     }
 
-    @Override
-    public void loadFromDb(FastMap<String, Object> data) {
+    public void setDay(int day) {
+        this.day = day;
     }
-    
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getSay() {
+        return say;
+    }
+
+    public void setSay(String say) {
+        this.say = say;
+    }
 }
