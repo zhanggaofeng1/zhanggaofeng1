@@ -4,16 +4,29 @@
  */
 package com.num.act.vo;
 
-import javolution.util.FastMap;
-
 /**
  *
  * @author Administrator
  */
 public abstract class AbstActVo {
 
-    public abstract FastMap<String, Object> saveToDb(FastMap<String, Object> saveMap);
-    public abstract void loadFromDb(FastMap<String, Object> data);
+    private int id;
+    private int actId;
+
+    public AbstActVo fromDbInit(int id, int actId) {
+        this.id = id;
+        this.actId = actId;
+        return this;
+    }
+
     public void init() {
+    }
+
+    public int curDbId() {
+        return id;
+    }
+
+    public int curActId() {
+        return actId;
     }
 }
