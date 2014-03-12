@@ -4,6 +4,7 @@
  */
 package com.num.mina.handler;
 
+import com.num.act.service.ActDataManager;
 import com.num.mina.vo.GsSession;
 import com.num.mina.util.SendMsgTool;
 import com.num.player.service.PlayerService;
@@ -30,6 +31,8 @@ public class GameHandlerService extends IoHandlerAdapter {
     private RegisterProtoService registerPtoService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private ActDataManager actManager;
 
     @Override
     public void sessionOpened(IoSession session) throws Exception {
@@ -38,7 +41,9 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        playerService.removePlayer(new GsSession(session));
+        GsSession gsSession = new GsSession(session);
+        actManager.userOffline(gsSession);
+        playerService.removePlayer(gsSession);
     }
 
     @Override

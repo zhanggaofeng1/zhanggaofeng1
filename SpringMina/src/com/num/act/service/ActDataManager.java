@@ -9,6 +9,8 @@ import com.num.act.dao.ActDataDao;
 import com.num.act.enums.ActIdEnum;
 import com.num.act.vo.AbstActVo;
 import com.num.act.vo.LoginActVo;
+import com.num.mina.vo.GsSession;
+import com.num.player.vo.Player;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -37,7 +39,7 @@ public class ActDataManager {
         // 说动数据对象必须先注册
         actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
     }
-    
+
     @PreDestroy
     public void destory() {
         saveToDbAllUserActInfo();
@@ -85,32 +87,40 @@ public class ActDataManager {
             if (actVo == null) {
                 continue;
             }
-            
+
             if (actId != actVo.curActId()) {
                 log.error("用户id = " + userId + " 存储活动信息时，key中的活动id = " + actId + " 和 活动对象中的活动id = " + actVo.curActId() + "不相同！!");
             }
-            
+
             if (!actDataDao.saveToDb(userId, actVo)) {
                 log.error("用户id = " + userId + " ,活动id = " + actId + " 的活动数据数据库存储失败！！！ data = " + JSON.toJSONString(actVo));
             }
         }
         return true;
     }
-    
+
+    public void userOffline(GsSession session) {
+        Player player = session.getPlayer();
+        if (player == null) {
+            log.error("用户离线时player对象为空！！！！");
+            return;
+        }
+        saveToDb(player.getPlayerId());
+    }
 
     public void saveToDbAllUserActInfo() {
 
         for (String key : actData.keySet()) {
-            
+
             AbstActVo actVo = actData.get(key);
             String[] info = key.split(key_spit);
             int userId = Integer.valueOf(info[0]);
             int actId = Integer.valueOf(info[1]);
-            
+
             if (actId != actVo.curActId()) {
                 log.error("用户id = " + userId + " 存储活动信息时，key中的活动id = " + actId + " 和 活动对象中的活动id = " + actVo.curActId() + "不相同！!");
             }
-            
+
             if (!actDataDao.saveToDb(userId, actVo)) {
                 log.error("用户id = " + userId + " ,活动id = " + actId + " 的活动数据数据库存储失败！！！ data = " + JSON.toJSONString(actVo));
             }
