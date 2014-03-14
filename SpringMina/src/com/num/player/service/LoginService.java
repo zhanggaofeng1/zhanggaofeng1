@@ -6,7 +6,7 @@ package com.num.player.service;
 
 import com.num.enums.RespState;
 import com.num.mina.vo.GsSession;
-import com.num.mina.util.SendMsgTool;
+import com.num.main.service.SendMsgService;
 import com.num.player.vo.Player;
 import com.num.player.dao.LoadPlayerDao;
 import com.num.proto.resp.impl.ResultState;
@@ -27,17 +27,19 @@ public class LoginService {
     private LoadPlayerDao loadPlayerDao;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private SendMsgService sendService;
 
     public void playerLogin(GsSession session, int playerId) {
 
         Player player = loadPlayerDao.loadPlayer(playerId);
         if (player == null) {
             log.error("playerId = " + playerId + " 的用户还没有注册！！！");
-            SendMsgTool.sendMsg(session, new ResultState(RespState.login_error.value()));
+            sendService.sendMsg(session, new ResultState(RespState.login_error.value()));
             return;
         }
         session.addPlayer(player);
         playerService.addPlayer(player);
-        SendMsgTool.sendMsg(session, new ResultState(RespState.login_success.value()));
+        sendService.sendMsg(session, new ResultState(RespState.login_success.value()));
     }
 }

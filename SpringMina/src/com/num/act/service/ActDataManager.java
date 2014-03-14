@@ -9,9 +9,10 @@ import com.num.act.dao.ActDataDao;
 import com.num.act.enums.ActIdEnum;
 import com.num.act.vo.AbstActVo;
 import com.num.act.vo.LoginActVo;
+import com.num.mina.vo.GsSession;
+import com.num.player.vo.Player;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javolution.util.FastMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +39,6 @@ public class ActDataManager {
         actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
     }
     
-    @PreDestroy
-    public void destory() {
-        saveToDbAllUserActInfo();
-    }
-
     private String getActDataKey(Integer userId, Integer actId) {
         return userId + key_spit + actId;
     }
@@ -95,6 +91,14 @@ public class ActDataManager {
             }
         }
         return true;
+    }
+    
+    public void playerOffline(GsSession session) throws Throwable {
+        Player player = session.getPlayer();
+        if (player == null) {
+            throw new Throwable("用户离线时，plyaer对象为空了,用户的活动数据离线没有存储");
+        }
+        saveToDb(player.getPlayerId());
     }
     
 

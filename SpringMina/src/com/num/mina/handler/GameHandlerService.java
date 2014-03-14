@@ -4,8 +4,9 @@
  */
 package com.num.mina.handler;
 
+import com.num.act.service.ActDataManager;
 import com.num.mina.vo.GsSession;
-import com.num.mina.util.SendMsgTool;
+import com.num.main.service.SendMsgService;
 import com.num.player.service.PlayerService;
 import com.num.proto.req.AbstReqProto;
 import com.num.proto.resp.AbstResp;
@@ -30,6 +31,8 @@ public class GameHandlerService extends IoHandlerAdapter {
     private RegisterProtoService registerPtoService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private ActDataManager actManager;
 
     @Override
     public void sessionOpened(IoSession session) throws Exception {
@@ -38,32 +41,38 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        playerService.removePlayer(new GsSession(session));
+        
+        GsSession gsSession = new GsSession(session);
+        try {
+            actManager.playerOffline(gsSession);
+            playerService.removePlayer(gsSession);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
-        log.debug("############# session idle ###################");
-        SendMsgTool.sendMsg(new GsSession(session), new ResultState(1000));
     }
 
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-        session.close(true);
+        
+        GsSession gsSession = new GsSession(session);
+        try {
+            actManager.playerOffline(gsSession);
+            playerService.removePlayer(gsSession);
+            session.close(true);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+        
         cause.printStackTrace();
     }
 
     @Override
     public void messageSent(IoSession session, Object message) throws Exception {
-        
-        AbstResp resp = (AbstResp)message;
-        Short protoId = registerPtoService.getRespProtoIdByClazz(resp.getClass());
-        if (protoId == null || protoId <= 0) {
-            log.error("resp : 协议名字：" + resp.getClass().getName() + " 的协议没有注册");
-            return ;
-        }
-        resp.setProtoId(protoId);
-        session.write(resp);
+        // 信息发送成功之后，调用！！
     }
 
     @Override
