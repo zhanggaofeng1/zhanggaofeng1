@@ -6,6 +6,7 @@ package com.num.main.service;
 
 import com.num.config.Configs;
 import com.num.mina.handler.GameHandlerService;
+import com.num.mina.kalive.KeepAliveFilterInMina;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.executor.ExecutorFilter;
@@ -30,7 +31,8 @@ public class StartService {
     private GameHandlerService minaHandler;
     @Autowired
     private ProtocolCodecFilter protoCodecFilter;
-    
+    @Autowired
+    private KeepAliveFilterInMina kaFilter;
     public void startGame() {
         
         try {
@@ -41,8 +43,9 @@ public class StartService {
             ioAcceptor.getSessionConfig().setTcpNoDelay(true);
             ioAcceptor.setReuseAddress(true);
             
-            ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
+            ioAcceptor.getFilterChain().addLast("keep-alive", kaFilter);
             ioAcceptor.getFilterChain().addLast("codec", protoCodecFilter);
+            ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
             ioAcceptor.getFilterChain().addLast("executor", new ExecutorFilter(Configs.game_core_pool_size, Configs.game_max_pool_size));
             ioAcceptor.setHandler(minaHandler);
             ioAcceptor.bind();
