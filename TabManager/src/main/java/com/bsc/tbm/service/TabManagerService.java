@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Administrator
+ * @author zhanggaofeng
  */
 @DependsOn({"tabService"})
 @Service
@@ -45,11 +45,15 @@ public class TabManagerService implements InitializingBean {
     private TabService tabService;
 
     public void afterPropertiesSet() throws Exception {
-        // 注册tab表和表对象的javaBean对象
+        // 一下两行代码顺序不能调换
+        register_tab();
+        load_tab();
+    }
+
+    private void register_tab() {
         registerTab("fat", CdFat.class);
         registerTab("map", CdMap.class);
         registerTab("monster", CdMonster.class);
-        load_tab();
     }
 
     private void registerTab(String tabName, Class<?> tabClazz) {
@@ -61,7 +65,7 @@ public class TabManagerService implements InitializingBean {
         File tabPath = new File(tab_path);
         try {
             if (!tabPath.exists()) {
-                throw new Throwable("文件路径 = " + tab_path + " 没有找到！！！！");
+                tabPath.mkdirs();
             }
             File[] files = tabPath.listFiles();
             if (files.length <= 0) {
@@ -90,7 +94,7 @@ public class TabManagerService implements InitializingBean {
     private void load_tab_logic(List<String> reloadTabs, File... files) throws Throwable {
 
         boolean reloadOper = false;
-        if (!reloadTabs.isEmpty()) {
+        if (reloadTabs != null && !reloadTabs.isEmpty()) {
             reloadOper = true;
         }
 
@@ -103,7 +107,7 @@ public class TabManagerService implements InitializingBean {
 
             String tabName = getTabName(tabPath);
             if (reloadOper) {
-                if (reloadTabs.isEmpty()) {
+                if (reloadTabs == null || reloadTabs.isEmpty()) {
                     break;
                 }
                 if (!reloadTabs.contains(tabName)) {
