@@ -10,23 +10,32 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
     
-    <!--handler-->
-    <bean id="minaHandler" class="com.num.mina.handler.GameHandlerService" />
-    <!--codec filter-->
-    <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
-        <constructor-arg>
-            <bean class="com.num.mina.factory.GameProtoCodecFactory">
-	      <constructor-arg type="java.lang.String" value="utf8" />
-	    </bean>
-        </constructor-arg>
-    </bean>
-    <!--acceptor-->
-    <bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor" destroy-method="unbind">
-        <property name="defaultLocalAddress">
-            <bean class="java.net.InetSocketAddress">
-                <constructor-arg type="java.lang.String" value="${game.ip}"/>
-                <constructor-arg type="int" value="${game.port}"/>
-            </bean>
-        </property>
-    </bean>
+  <!--handler-->
+  <bean id="minaHandler" class="com.num.mina.handler.GameHandlerService" />
+  <!--codec filter-->
+  <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+    <constructor-arg>
+      <bean class="com.num.mina.factory.GameProtoCodecFactory">
+	<constructor-arg type="java.lang.String" value="utf8" />
+      </bean>
+    </constructor-arg>
+  </bean>
+  <!--acceptor-->
+  <bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor" destroy-method="unbind">
+    <property name="defaultLocalAddress">
+      <bean class="java.net.InetSocketAddress">
+	<constructor-arg type="java.lang.String" value="${game.ip}"/>
+	<constructor-arg type="int" value="${game.port}"/>
+      </bean>
+    </property>
+  </bean>
+  <!--keep_alive-->
+  <bean id="keepAliveFactory" class="com.num.mina.kalive.KeepAliveMessageFactoryImpl"></bean>
+  <bean id="keepAliveException" class="com.num.mina.kalive.KeepAliveExceptionHandler"></bean>
+  <bean id="keepAliveInMina" class="com.num.mina.kalive.KeepAliveFilterInMina">
+    <constructor-arg ref="keepAliveFactory"/>
+    <constructor-arg ref="keepAliveException"/>
+    <constructor-arg type="int" value="${ka.interval}"/>
+    <constructor-arg type="int" value="${ka.timeout}"/>
+  </bean>
 </beans>

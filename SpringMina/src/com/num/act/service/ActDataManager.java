@@ -13,7 +13,6 @@ import com.num.mina.vo.GsSession;
 import com.num.player.vo.Player;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javolution.util.FastMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +38,16 @@ public class ActDataManager {
         // 说动数据对象必须先注册
         actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
     }
+<<<<<<< HEAD
 
     @PreDestroy
     public void destory() {
         saveToDbAllUserActInfo();
     }
 
+=======
+    
+>>>>>>> 26728141c00c26ae4031e2e915bc36e93a12911a
     private String getActDataKey(Integer userId, Integer actId) {
         return userId + key_spit + actId;
     }
@@ -98,6 +101,7 @@ public class ActDataManager {
         }
         return true;
     }
+<<<<<<< HEAD
 
     public void userOffline(GsSession session) {
         Player player = session.getPlayer();
@@ -107,6 +111,17 @@ public class ActDataManager {
         }
         saveToDb(player.getPlayerId());
     }
+=======
+    
+    public void playerOffline(GsSession session) throws Throwable {
+        Player player = session.getPlayer();
+        if (player == null) {
+            throw new Throwable("用户离线时，plyaer对象为空了,用户的活动数据离线没有存储");
+        }
+        saveToDb(player.getPlayerId());
+    }
+    
+>>>>>>> 26728141c00c26ae4031e2e915bc36e93a12911a
 
     public void saveToDbAllUserActInfo() {
 

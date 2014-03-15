@@ -28,10 +28,6 @@ public class GsSession {
     }
     
     public void sendMessage(Object obj) {
-        try {
-            session.getHandler().messageSent(session, obj);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        session.write(obj);
     }
 }
