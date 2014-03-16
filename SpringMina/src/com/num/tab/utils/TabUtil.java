@@ -21,7 +21,7 @@ public class TabUtil {
     private FastMap<String, Object> data;
     
     public TabUtil() {
-        data = new FastMap<String, Object>();
+        data = new FastMap<>();
     }
 
     public void realPackageAbstTab(String title, String type, String data, String fileName, int col) {

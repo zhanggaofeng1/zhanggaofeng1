@@ -35,6 +35,10 @@
 
     <!--启动引导类-->
     <bean id="gameServie" class="com.num.main.GameService"/>
+    <!--活动管理bean-->
+    <bean id="actManager" class="com.num.tab.service.TabManagerService">
+        <constructor-arg value="${tab_path}"></constructor-arg>
+    </bean>
     <!--@Async-->
     <task:executor id="asyncExecutor" pool-size="3-7" queue-capacity="40"/>  
     <task:annotation-driven executor="asyncExecutor"/>
