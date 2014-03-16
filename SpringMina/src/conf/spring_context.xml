@@ -13,18 +13,28 @@
        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
     <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:locations="/props/*.properties"/>
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:locations="/props/*.properties"/>
 
     <!--spring 注解扫描-->
     <context:annotation-config/>
     <context:component-scan base-package="com.num.*.service,com.num.*.dao"/>
+
+    <!-- class config -->
+    <bean id="config" class="com.num.config.ConfigBean">
+        <property name="corePoolSize" value="${core.pool}"></property>
+        <property name="maxPoolSize" value="${max.pool}"></property>
+        <property name="minaIdle" value="${mina.idle}"></property>
+        <property name="minaRdOper" value="${mina.rd.oper}"></property>
+        <property name="minaWeTimeout" value="${mina.we.timeout}"></property>
+    </bean>
+
     <import resource="./spring_mina_cfg.xml"/>
     <import resource="./database_cfg.xml"/>
     <import resource="./spring_rmi_cfg.xml"/>
+
     <!--启动引导类-->
     <bean id="gameServie" class="com.num.main.GameService"/>
-  
     <!--@Async-->
     <task:executor id="asyncExecutor" pool-size="3-7" queue-capacity="40"/>  
     <task:annotation-driven executor="asyncExecutor"/>

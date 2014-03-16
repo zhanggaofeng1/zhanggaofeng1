@@ -19,4 +19,8 @@ public abstract class AbstTab {
     public int getKey() {
         return keyId;
     }
+    
+    protected void setKey(int mapKeyId) {
+        this.keyId = mapKeyId;
+    }
 }

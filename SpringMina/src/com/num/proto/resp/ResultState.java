@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.proto.resp.impl;
+package com.num.proto.resp;
 
 import com.num.proto.resp.AbstResp;
 import org.apache.mina.core.buffer.IoBuffer;

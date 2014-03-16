@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.main.service;
+package com.num.proto.service;
 
 import com.num.mina.vo.GsSession;
 import com.num.proto.resp.AbstResp;
-import com.num.proto.service.RegisterProtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,14 @@ public class SendMsgService {
 
         Short protoId = registerPtoService.getRespProtoIdByClazz(resp.getClass());
         if (protoId == null || protoId <= 0) {
-            log.error("resp : 协议名字：" + resp.getClass().getName() + " 的协议没有注册");
-            return;
+            try {
+                throw new Throwable("resp : 协议名字：" + resp.getClass().getName() + " 的协议没有注册");
+            } catch (Throwable ex) {
+                ex.printStackTrace();
+            }
         }
         resp.setProtoId(protoId);
-        session.sendMessage(resp);
-
+        
         session.sendMessage(resp);
     }
 }

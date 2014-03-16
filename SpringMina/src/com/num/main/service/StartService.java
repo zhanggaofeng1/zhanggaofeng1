@@ -4,7 +4,7 @@
  */
 package com.num.main.service;
 
-import com.num.config.Configs;
+import com.num.config.ConfigBean;
 import com.num.mina.handler.GameHandlerService;
 import com.num.mina.kalive.KeepAliveFilterInMina;
 import org.apache.mina.core.session.IdleStatus;
@@ -33,20 +33,23 @@ public class StartService {
     private ProtocolCodecFilter protoCodecFilter;
     @Autowired
     private KeepAliveFilterInMina kaFilter;
+    @Autowired
+    private ConfigBean config;
+    
     public void startGame() {
         
         try {
             
-            ioAcceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, Configs.game_idle_both_time);
-            ioAcceptor.getSessionConfig().setUseReadOperation(Configs.game_session_read_oper);
-            ioAcceptor.getSessionConfig().setWriteTimeout(Configs.game_write_timeout);
+            ioAcceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, config.getMinaIdle());
+            ioAcceptor.getSessionConfig().setUseReadOperation(config.isMinaRdOper());
+            ioAcceptor.getSessionConfig().setWriteTimeout(config.getMinaWeTimeout());
             ioAcceptor.getSessionConfig().setTcpNoDelay(true);
             ioAcceptor.setReuseAddress(true);
             
             ioAcceptor.getFilterChain().addLast("keep-alive", kaFilter);
             ioAcceptor.getFilterChain().addLast("codec", protoCodecFilter);
             ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
-            ioAcceptor.getFilterChain().addLast("executor", new ExecutorFilter(Configs.game_core_pool_size, Configs.game_max_pool_size));
+            ioAcceptor.getFilterChain().addLast("executor", new ExecutorFilter(config.getCorePoolSize(), config.getMaxPoolSize()));
             ioAcceptor.setHandler(minaHandler);
             ioAcceptor.bind();
             

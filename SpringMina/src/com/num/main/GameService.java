@@ -6,7 +6,7 @@ package com.num.main;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.num.config.Configs;
+import com.num.config.ConfigBean;
 import com.num.main.service.ShutdownService;
 import com.num.main.service.StartService;
 import java.io.FileInputStream;
@@ -31,7 +31,7 @@ public class GameService {
 
         try {
             Properties props = new Properties();
-            props.load(new FileInputStream(Configs.log4j_cfg_path));
+            props.load(new FileInputStream(ConfigBean.log4j_cfg_path));
             PropertyConfigurator.configure(props);
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -41,7 +41,7 @@ public class GameService {
 
     public static void main(String... args) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext(Configs.spring_cfg_path);
+        ApplicationContext context = new ClassPathXmlApplicationContext(ConfigBean.spring_cfg_path);
         GameService gameService = context.getBean(GameService.class);
         gameService.startGame();
         gameService.shutdownGame();

@@ -17,6 +17,6 @@ public class KeepAliveFilterInMina extends KeepAliveFilter {
 
     public KeepAliveFilterInMina(KeepAliveMessageFactory factory, KeepAliveRequestTimeoutHandler timeoutHandler, int interval, int timeout) {
         super(factory, IdleStatus.BOTH_IDLE, timeoutHandler, interval, timeout);
-        this.setForwardEvent(false);
+        this.setForwardEvent(true);
     }
 }

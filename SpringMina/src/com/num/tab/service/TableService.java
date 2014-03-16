@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TableService {
 
-    public final TabInstance<UserInfo> userInfo_tab = new TabInstance<UserInfo>("src/tab/userInfo.tab", UserInfo.class);
+    public final TabInstance<UserInfo> userInfo_tab = new TabInstance<>("src/tab/userInfo.tab", UserInfo.class);
 
     @PostConstruct
     public void startInit() {
@@ -49,13 +49,7 @@ public class TableService {
                     break;
                 }
 
-            } catch (IllegalArgumentException ex) {
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            } catch (NoSuchFieldException ex) {
-                ex.printStackTrace();
-            } catch (SecurityException ex) {
+            } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
                 ex.printStackTrace();
             }
         }

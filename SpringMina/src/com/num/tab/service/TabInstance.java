@@ -63,8 +63,7 @@ public class TabInstance<T extends AbstTab> {
             String[] titles = getStrArray(reader.readLine());// 英文标题
             String[] types = getStrArray(reader.readLine());// 类型注释
             if (titles.length != types.length) {
-                log.error("表 name = " + fileName + " 标题和类型的列数不同！！");
-                System.exit(1);
+                throw new Throwable("表 name = " + fileName + " 标题和类型的列数不同！！");
             }
 
             String line = null;
@@ -73,8 +72,7 @@ public class TabInstance<T extends AbstTab> {
 
                 String[] dataArr = line.split("\t");
                 if (titles.length != dataArr.length) {
-                    log.error("表 name = " + fileName + " 的第 " + i + " 行数据和title的列数不相等！！");
-                    System.exit(1);
+                    throw new Throwable("表 name = " + fileName + " 的第 " + i + " 行数据和title的列数不相等！！");
                 }
 
                 linePackageAbstTab(titles, types, dataArr);
@@ -86,19 +84,12 @@ public class TabInstance<T extends AbstTab> {
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-            System.exit(1);
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
-            System.exit(1);
-        } catch (IOException ex) {
+        } catch (IOException | InstantiationException | IllegalAccessException ex) {
             ex.printStackTrace();
-            System.exit(1);
-        } catch (InstantiationException ex) {
+        } catch (Throwable ex) {
             ex.printStackTrace();
-            System.exit(1);
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-            System.exit(1);
         }
     }
 
@@ -107,7 +98,7 @@ public class TabInstance<T extends AbstTab> {
 
     }
 
-    private void linePackageAbstTab(String[] titles, String[] types, String[] dataArr) throws InstantiationException, IllegalAccessException {
+    private void linePackageAbstTab(String[] titles, String[] types, String[] dataArr) throws InstantiationException, IllegalAccessException, Throwable {
 
         TabUtil tab = new TabUtil();
 
@@ -119,8 +110,7 @@ public class TabInstance<T extends AbstTab> {
         T t = clazz.newInstance();
         t.initData(tab);
         if (t.getKey() == 0) {
-            log.error("tab表对象 " + t.getClass().getName() + " 的 keyId 属性字段没有设置值！！！");
-            System.exit(1);
+            throw new Throwable("tab表对象 " + t.getClass().getName() + " 的 keyId 属性字段没有设置值！！！");
         }
         datas.put(t.getKey(), t);
     }

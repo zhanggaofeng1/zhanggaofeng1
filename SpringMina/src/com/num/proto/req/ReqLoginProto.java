@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.num.proto.req.impl;
+package com.num.proto.req;
 
 import com.num.player.service.LoginService;
-import com.num.proto.req.AbstReqProto;
 import org.apache.mina.core.buffer.IoBuffer;
 
 /**
