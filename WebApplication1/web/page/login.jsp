@@ -1,3 +1,8 @@
+<%@page import="org.jfree.chart.servlet.ServletUtilities"%>
+<%@page import="org.jfree.chart.plot.PlotOrientation"%>
+<%@page import="org.jfree.chart.ChartFactory"%>
+<%@page import="org.jfree.chart.JFreeChart"%>
+<%@page import="org.jfree.data.category.DefaultCategoryDataset"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,17 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>build progect</title>
   </head>
-
   <body>
-    <table align="center">
-      <tr><th>等级</th><th>玩家经验值</th><th>战斗经验值</th></tr>
-      <c:forEach items="${info}" var="cdLv">
-	<tr>
-	  <td><c:out value="${cdLv.player_lv}"/></td>
-	  <td><c:out value="${cdLv.player_exp}"/></td>
-	  <td><c:out value="${cdLv.bat_exp}"/></td>
-	</tr>
-      </c:forEach>
-    </table>
+  <img src="${url}" width="500" height="300" border="0" usemap="#${name}"/>
   </body>
 </html>

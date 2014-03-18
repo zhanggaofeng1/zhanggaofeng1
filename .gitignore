@@ -11,4 +11,11 @@
 /JavaApplication3/build/
 /TabTool/nbproject/private/
 /TabTool/build/
+<<<<<<< HEAD
+/TabTool/dist/
 /SpringMina/dist/
+/JfreeChartWeb/nbproject/private/
+=======
+/SpringMina/dist/
+>>>>>>> 26728141c00c26ae4031e2e915bc36e93a12911a
+/GameServer/target/

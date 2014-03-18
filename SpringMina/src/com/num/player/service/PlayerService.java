@@ -39,17 +39,11 @@ public class PlayerService {
         return true;
     }
 
-    public boolean removePlayer(GsSession session) {
-        Player player = session.getPlayer();
-        if (player == null) {
-            log.error("用户session中已经没有玩家对象，不能删除队列中的player对象了！！！");
-            return false;
-        }
+    public boolean removePlayer(Player player) {
         
         if (!players.containsKey(player.getId())) {
             return true;
         }
-        
         players.remove((Integer)player.getId());
         return savePlayerDao.savePlayer(player);
     }

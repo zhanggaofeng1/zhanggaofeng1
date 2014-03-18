@@ -6,10 +6,10 @@ package com.num.player.service;
 
 import com.num.enums.RespState;
 import com.num.mina.vo.GsSession;
-import com.num.main.service.SendMsgService;
+import com.num.proto.service.SendMsgService;
 import com.num.player.vo.Player;
 import com.num.player.dao.LoadPlayerDao;
-import com.num.proto.resp.impl.ResultState;
+import com.num.proto.resp.ResultState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

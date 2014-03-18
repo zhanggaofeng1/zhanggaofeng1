@@ -6,8 +6,10 @@ package tabtool;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import tabtool.confmanager.ConfManager;
+import tabtool.service.TabService;
+
 /**
- *
  * @author zhanggaofeng
  */
 public class TabTool extends javax.swing.JFrame {
@@ -17,6 +19,18 @@ public class TabTool extends javax.swing.JFrame {
      */
     public TabTool() {
         initComponents();
+        initData();
+    }
+
+    private void initData() {
+        String execlPath = ConfManager.getInstance().getPropertyVal(ConfManager.excel_path);
+        if (execlPath != null && !execlPath.isEmpty()) {
+            excel_path.setText(execlPath.trim());
+        }
+        String tabPath = ConfManager.getInstance().getPropertyVal(ConfManager.tab_path);
+        if (tabPath != null && !tabPath.isEmpty()) {
+            tab_path.setText(tabPath.trim());
+        }
     }
 
     /**
@@ -32,7 +46,7 @@ public class TabTool extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        execl_path = new javax.swing.JTextField();
+        excel_path = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tab_path = new javax.swing.JTextField();
@@ -42,6 +56,7 @@ public class TabTool extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("作者:张高峰");
@@ -58,9 +73,9 @@ public class TabTool extends javax.swing.JFrame {
 
         jLabel2.setText("源EXECL文件：");
 
-        execl_path.addActionListener(new java.awt.event.ActionListener() {
+        excel_path.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                execl_pathActionPerformed(evt);
+                excel_pathActionPerformed(evt);
             }
         });
 
@@ -102,6 +117,13 @@ public class TabTool extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("执行转换");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,17 +144,19 @@ public class TabTool extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tab_path, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                            .addComponent(execl_path))
+                            .addComponent(excel_path))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
                 .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
@@ -144,7 +168,7 @@ public class TabTool extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(execl_path, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(excel_path, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jButton1)))
@@ -158,7 +182,8 @@ public class TabTool extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -171,25 +196,37 @@ public class TabTool extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tab_pathActionPerformed
 
-    private void execl_pathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execl_pathActionPerformed
+    private void excel_pathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excel_pathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_execl_pathActionPerformed
+    }//GEN-LAST:event_excel_pathActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
+        String filePath = excel_path.getText();
+
+        JFileChooser chooser = null;
+        if (filePath == null || filePath.isEmpty()) {
+            chooser = new JFileChooser();
+        } else {
+            chooser = new JFileChooser(new File(filePath.trim()));
+        }
+
         chooser.showOpenDialog(this);
+
         File chooserFile = chooser.getSelectedFile();
         if (chooserFile == null) {
-            logInfo.append("请选择一个execl文件！\r\n");
             return;
         }
+
         String fileName = chooserFile.getName();
         if (!fileName.endsWith(".xls") && !fileName.endsWith(".xlsx")) {
             logInfo.append("请选择一个execl文件！\r\n");
             return;
         }
-        execl_path.setText(chooserFile.getPath().trim());
+
+        String selectFile = chooserFile.getPath().trim();
+        excel_path.setText(selectFile);
+        ConfManager.getInstance().addPropertyVal(ConfManager.excel_path, selectFile);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -199,16 +236,47 @@ public class TabTool extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JFileChooser dirChooser = new JFileChooser();
-        dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        dirChooser.showDialog(this, "确认");
-        File dirFile = dirChooser.getSelectedFile();
-        if (dirFile == null) {
-            logInfo.append("请选择一个TAB表产生路径！\r\n");
-            return ;
+        String dirPath = tab_path.getText();
+
+        JFileChooser chooser = null;
+        if (dirPath == null || dirPath.isEmpty()) {
+            chooser = new JFileChooser();
+        } else {
+            chooser = new JFileChooser(new File(dirPath.trim()));
         }
-        tab_path.setText(dirFile.getPath().trim());
+
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.showDialog(this, "确认");
+
+        File dirFile = chooser.getSelectedFile();
+        if (dirFile == null) {
+            return;
+        }
+
+        String selectFile = dirFile.getPath().trim();
+        tab_path.setText(selectFile);
+        ConfManager.getInstance().addPropertyVal(ConfManager.tab_path, selectFile);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        ConfManager manager = ConfManager.getInstance();
+        manager.save();
+        
+        String excelPath = manager.getPropertyVal(ConfManager.excel_path);
+        if (excelPath == null || excelPath.isEmpty()) {
+            logInfo.append("请选择一个execl文档!\r\n");
+            return;
+        }
+        String tabPath = manager.getPropertyVal(ConfManager.tab_path);
+        if (tabPath == null || tabPath.isEmpty()) {
+            logInfo.append("请选择一个tab生成路径!\r\n");
+            return;
+        }
+        TabService tabService = TabService.getInstance();
+        tabService.init(logInfo, excelPath, tabPath);
+        tabService.startService();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,10 +313,11 @@ public class TabTool extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField execl_path;
+    private javax.swing.JTextField excel_path;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,8 +5,8 @@
 package com.num.proto.service;
 
 import com.num.proto.req.AbstReqProto;
-import com.num.proto.req.impl.ReqLoginProto;
-import com.num.proto.resp.impl.ResultState;
+import com.num.proto.req.ReqLoginProto;
+import com.num.proto.resp.ResultState;
 import javax.annotation.PostConstruct;
 import javolution.util.FastMap;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegisterProtoService {
 
-    private final FastMap<Short, Class<? extends AbstReqProto>> reqProMap = new FastMap<Short, Class<? extends AbstReqProto>>(100);
-    private final FastMap<Class<?>, Short> respProMap = new FastMap<Class<?>, Short>(100);
+    private final FastMap<Short, Class<? extends AbstReqProto>> reqProMap = new FastMap<>(100);
+    private final FastMap<Class<?>, Short> respProMap = new FastMap<>(100);
 
     @PostConstruct
     public void init() {

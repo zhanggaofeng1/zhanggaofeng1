@@ -41,8 +41,12 @@ public class GameProtoDecoder extends CumulativeProtocolDecoder {
         public boolean use;
 
         public void initContext() {
-            
-            this.inBuf = IoBuffer.allocate(100).setAutoExpand(true);
+
+            if (this.inBuf == null) {
+                this.inBuf = IoBuffer.allocate(100).setAutoExpand(true);
+            } else {
+                this.inBuf = this.inBuf.rewind();
+            }
             length = 0;
             matchCt = 0;
             use = false;

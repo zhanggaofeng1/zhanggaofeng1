@@ -11,7 +11,7 @@ package com.num.enums;
 public enum RespState {
 
     login_error(-100),
-    login_success(2),
+    login_success(200),
     ;
     private int value;
     private RespState(int value) {

@@ -12,6 +12,7 @@ import org.apache.mina.core.session.IoSession;
  * @author Administrator
  */
 public class GsSession {
+    
     private static final String playerKey = "player_obj";
     private IoSession session;
 
