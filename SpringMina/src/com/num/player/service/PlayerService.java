@@ -4,7 +4,6 @@
  */
 package com.num.player.service;
 
-import com.num.mina.vo.GsSession;
 import com.num.player.dao.SavePlayerDao;
 import com.num.player.vo.Player;
 import com.num.proto.req.AbstReqProto;
@@ -30,10 +29,6 @@ public class PlayerService {
     @Autowired
     private SavePlayerDao savePlayerDao;
 
-    public void init(AbstReqProto reqPto, IoSession session) {
-        reqPto.init(new GsSession(session), context);
-    }
-    
     public boolean addPlayer(Player player) {
         players.put(player.getId(), player);
         return true;

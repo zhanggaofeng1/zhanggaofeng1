@@ -17,6 +17,7 @@ import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 /**
  *
@@ -25,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GameHandlerService extends IoHandlerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(GameHandlerService.class);
+    @Autowired
+    private ApplicationContext context;
     @Autowired
     private RegisterProtoService registerPtoService;
     @Autowired
@@ -83,13 +86,12 @@ public class GameHandlerService extends IoHandlerAdapter {
 
         IoBuffer buf = (IoBuffer) message;
         short protoId = buf.getShort();
-        Class<? extends AbstReqProto> protoClazz = registerPtoService.getReqProtoById(protoId);
-        if (protoClazz == null) {
+        AbstReqProto proto = registerPtoService.getReqProtoById(protoId);
+        if (proto == null) {
             log.error("req : 协议id = " + protoId + " 的协议没有注册！");
             return;
         }
-        AbstReqProto proto = protoClazz.newInstance();
-        playerService.init(proto, session);
+        proto.setSession(session);
         proto.reader(buf);
         proto.req_handler();
     }

@@ -4,33 +4,33 @@
  */
 package com.num.proto.req;
 
-import com.num.mina.vo.GsSession;
+import com.num.proto.CommonProto;
 import org.apache.mina.core.buffer.IoBuffer;
-import org.springframework.context.ApplicationContext;
+import org.apache.mina.core.session.IoSession;
 
 /**
  *
  * @author Administrator
  */
-public abstract class AbstReqProto {
+public abstract class AbstReqProto extends CommonProto{
 
-    private ApplicationContext context;
-    private GsSession session;
+    private IoSession session;
+    
+    public AbstReqProto(short protoId) {
+        super(protoId);
+    }
     
     public abstract void reader(IoBuffer buf);
     public abstract void req_handler();
-    
-    public void init(GsSession session, ApplicationContext context) {
-        this.session = session;
-        this.context = context;
+    public void init() {
     }
-    
-    public final GsSession getGsSessioin() {
+
+    public IoSession getSession() {
         return session;
     }
-    
-    public final ApplicationContext getContext() {
-        return context;
+
+    public void setSession(IoSession session) {
+        this.session = session;
     }
     
     protected int readInt(IoBuffer buf) {
