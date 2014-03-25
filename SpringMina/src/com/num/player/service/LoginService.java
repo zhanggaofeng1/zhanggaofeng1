@@ -30,16 +30,19 @@ public class LoginService {
     @Autowired
     private SendMsgService sendService;
 
-    public void playerLogin(GsSession session, int playerId) {
+    public void playerLogin(GsSession gsSession, int playerId) {
 
         Player player = loadPlayerDao.loadPlayer(playerId);
         if (player == null) {
             log.error("playerId = " + playerId + " 的用户还没有注册！！！");
-            sendService.sendMsg(session, new ResultState(RespState.login_error.value()));
+            sendService.sendMsg(gsSession, new ResultState(RespState.login_error.value()));
             return;
         }
-        session.addPlayer(player);
+        
+        gsSession.addPlayer(player);
+        player.setGsSession(gsSession);
+        
         playerService.addPlayer(player);
-        sendService.sendMsg(session, new ResultState(RespState.login_success.value()));
+        sendService.sendMsg(gsSession, new ResultState(RespState.login_success.value()));
     }
 }

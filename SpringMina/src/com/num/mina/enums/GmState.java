@@ -9,6 +9,7 @@ package com.num.mina.enums;
  * @author Administrator
  */
 public enum GmState {
+    GAME_NOT,
     GAME_OUT,
     GAME_IN,
 }

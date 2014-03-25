@@ -13,10 +13,14 @@ import org.apache.mina.core.session.IoSession;
  */
 public class GsSession {
     
-    private static final String playerKey = "player_obj";
+    public static final String playerKey = "player_obj";
     private IoSession session;
-
+    
     public GsSession(IoSession session) {
+        this.session = session;
+    }
+    
+    public void setSession(IoSession session) {
         this.session = session;
     }
     

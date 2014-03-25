@@ -5,6 +5,7 @@
 package com.num.mina.handler;
 
 import com.num.act.service.ActDataManager;
+import com.num.mina.enums.GmState;
 import com.num.mina.vo.GsSession;
 import com.num.player.service.PlayerService;
 import com.num.player.vo.Player;
@@ -17,7 +18,6 @@ import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 
 /**
  *
@@ -26,8 +26,6 @@ import org.springframework.context.ApplicationContext;
 public class GameHandlerService extends IoHandlerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(GameHandlerService.class);
-    @Autowired
-    private ApplicationContext context;
     @Autowired
     private RegisterProtoService registerPtoService;
     @Autowired
@@ -80,15 +78,25 @@ public class GameHandlerService extends IoHandlerAdapter {
     public void messageSent(IoSession session, Object message) throws Exception {
         log.debug("#################信息发送成功之后调用###########################");
     }
+    
+    private GmState getGmState(IoSession session) {
+        
+        Object obj = session.getAttribute("GmState");
+        if (obj == null) {
+            return GmState.GAME_NOT;
+        }
+        return (GmState) obj;
+    }
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
 
         IoBuffer buf = (IoBuffer) message;
         short protoId = buf.getShort();
-        AbstReqProto proto = registerPtoService.getReqProtoById(protoId);
+        GmState state = getGmState(session);
+        AbstReqProto proto = registerPtoService.getReqProtoById(protoId, state);
         if (proto == null) {
-            log.error("req : 协议id = " + protoId + " 的协议没有注册！");
+            log.error("req : 协议id = " + protoId + "  state =" + state + " 没有对应的协议");
             return;
         }
         proto.setSession(session);

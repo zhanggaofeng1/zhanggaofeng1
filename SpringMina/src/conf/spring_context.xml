@@ -31,6 +31,7 @@
 
     <import resource="./spring_mina_cfg.xml"/>
     <import resource="./database_cfg.xml"/>
+    <import resource="./mongodb_cfg.xml"/>
     <import resource="./spring_rmi_cfg.xml"/>
 
     <!--启动引导类-->

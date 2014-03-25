@@ -31,8 +31,17 @@ public class RegisterProtoService {
         requestProtoLoad();
         responseProtoLoad();
     }
+
+    // 接收协议注册
+    private void requestProtoLoad() {
+        request_proto_register(new ReqLoginProto((short) 0x001), GmState.GAME_OUT);
+    }
+
+    // 发送协议注册
+    private void responseProtoLoad() {
+        respProMap.put(ResultState.class, (short) 0x001);
+    }
     
-    // 根据协议id获取协议Class
     public AbstReqProto getReqProtoById(Short proId, GmState state) {
         FastMap<Short, AbstReqProto> reqProtos = reqProMap.get(state);
         if (reqProtos == null || reqProtos.isEmpty()) {
@@ -40,25 +49,14 @@ public class RegisterProtoService {
         }
         return reqProtos.get(proId);
     }
-    
-    // 根据协议Class获取协议id
+
     public Short getRespProtoIdByClazz(Class<?> clazz) {
         return respProMap.get(clazz);
     }
-    
 
-    // 接收协议注册
-    private void requestProtoLoad() {
-        request_proto_register(new ReqLoginProto((short)0x001), GmState.GAME_OUT);
-    }
-    
 
-    // 发送协议注册
-    private void responseProtoLoad() {
-        respProMap.put(ResultState.class, (short)0x1);
-    }
-    
     private void request_proto_register(AbstReqProto reqProto, GmState state) {
+        
         reqProto.setContext(context);
         reqProto.init();
         FastMap<Short, AbstReqProto> reqProtos = reqProMap.get(state);
@@ -66,6 +64,6 @@ public class RegisterProtoService {
             reqProtos = new FastMap<Short, AbstReqProto>();
             reqProMap.put(state, reqProtos);
         }
-//        reqProMap.put(reqProto.getProtoId(), reqProto);
-    } 
+        reqProtos.put(reqProto.getProtoId(), reqProto);
+    }
 }

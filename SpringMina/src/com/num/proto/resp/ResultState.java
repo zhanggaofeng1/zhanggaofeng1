@@ -4,7 +4,6 @@
  */
 package com.num.proto.resp;
 
-import com.num.proto.resp.AbstResp;
 import org.apache.mina.core.buffer.IoBuffer;
 
 /**

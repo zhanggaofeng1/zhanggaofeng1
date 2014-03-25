@@ -4,6 +4,8 @@
  */
 package com.num.proto.req;
 
+import com.num.mina.vo.GsSession;
+import com.num.player.vo.Player;
 import com.num.proto.CommonProto;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -15,7 +17,6 @@ import org.apache.mina.core.session.IoSession;
 public abstract class AbstReqProto extends CommonProto{
 
     private IoSession session;
-    
     public AbstReqProto(short protoId) {
         super(protoId);
     }
@@ -25,13 +26,25 @@ public abstract class AbstReqProto extends CommonProto{
     public void init() {
     }
 
-    public IoSession getSession() {
-        return session;
-    }
-
     public void setSession(IoSession session) {
         this.session = session;
     }
+    
+    public Player getPlayer() {
+        Object player = session.getAttribute(GsSession.playerKey);
+        if (player == null) {
+            return null;
+        }
+        return (Player) player;
+    }
+    
+    public GsSession getGsSession() {
+        if (session == null) {
+            return null;
+        }
+        return new GsSession(session);
+    }
+
     
     protected int readInt(IoBuffer buf) {
         return buf.getInt();
