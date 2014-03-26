@@ -9,7 +9,6 @@ import com.num.act.dao.ActDataDao;
 import com.num.act.enums.ActIdEnum;
 import com.num.act.vo.AbstActVo;
 import com.num.act.vo.LoginActVo;
-import com.num.mina.vo.GsSession;
 import com.num.player.vo.Player;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -35,7 +34,7 @@ public class ActDataManager {
 
     @PostConstruct
     public void init() {
-        // 说动数据对象必须先注册
+        // 活动数据对象必须先注册
         actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
     }
 
