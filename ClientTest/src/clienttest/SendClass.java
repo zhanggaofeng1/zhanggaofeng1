@@ -25,7 +25,7 @@ public class SendClass implements Runnable {
         while (true) {
             try {
                 Thread.sleep(1000);
-                session.write(new Integer[]{1,100});
+                session.write(new Integer[]{0x001,100});
             } catch (Exception ex) {
                 Logger.getLogger(ClientTest.class.getName()).log(Level.SEVERE, null, ex);
             }

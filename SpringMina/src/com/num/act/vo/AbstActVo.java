@@ -4,6 +4,8 @@
  */
 package com.num.act.vo;
 
+import java.nio.ByteBuffer;
+
 /**
  *
  * @author Administrator

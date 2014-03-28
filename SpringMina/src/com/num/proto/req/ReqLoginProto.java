@@ -32,7 +32,7 @@ public class ReqLoginProto extends AbstReqProto{
 
     @Override
     public void req_handler() {
-        loginService.playerLogin(getGsSession(), playerId);
+        loginService.savePlayer(getGsSession(), playerId);
     }
     
 }

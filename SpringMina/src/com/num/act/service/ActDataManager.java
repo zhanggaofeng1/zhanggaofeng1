@@ -8,7 +8,8 @@ import com.alibaba.fastjson.JSON;
 import com.num.act.dao.ActDataDao;
 import com.num.act.enums.ActIdEnum;
 import com.num.act.vo.AbstActVo;
-import com.num.act.vo.LoginActVo;
+import com.num.act.vo.CommonAbstActVo;
+import com.num.act.vo.TestCommonActVo;
 import com.num.player.vo.Player;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -35,7 +36,7 @@ public class ActDataManager {
     @PostConstruct
     public void init() {
         // 活动数据对象必须先注册
-        actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
+        actClass.put(ActIdEnum.login_act_id.value(), TestCommonActVo.class);
     }
 
     private String getActDataKey(Integer userId, Integer actId) {
@@ -72,7 +73,15 @@ public class ActDataManager {
         }
     }
 
-    public boolean saveToDb(Integer userId) {
+    public boolean saveActData(int userId, AbstActVo actVo) {
+        return actDataDao.saveToDb(userId, actVo);
+    }
+
+    public void playerOffline(Player player) throws Throwable {
+        saveToDb(player.getPlayerId());
+    }
+
+    private boolean saveToDb(Integer userId) {
 
         for (Integer actId : actClass.keySet()) {
             String key = getActDataKey(userId, actId);
@@ -85,15 +94,11 @@ public class ActDataManager {
                 log.error("用户id = " + userId + " 存储活动信息时，key中的活动id = " + actId + " 和 活动对象中的活动id = " + actVo.curActId() + "不相同！!");
             }
 
-            if (!actDataDao.saveToDb(userId, actVo)) {
+            if (!saveActData(userId, actVo)) {
                 log.error("用户id = " + userId + " ,活动id = " + actId + " 的活动数据数据库存储失败！！！ data = " + JSON.toJSONString(actVo));
             }
         }
         return true;
-    }
-
-    public void playerOffline(Player player) throws Throwable {
-        saveToDb(player.getPlayerId());
     }
 
     public void saveToDbAllUserActInfo() {
@@ -101,6 +106,9 @@ public class ActDataManager {
         for (String key : actData.keySet()) {
 
             AbstActVo actVo = actData.get(key);
+            if (actVo instanceof CommonAbstActVo) {// 共有的活动数据不在此存储
+                continue;
+            }
             String[] info = key.split(key_spit);
             int userId = Integer.valueOf(info[0]);
             int actId = Integer.valueOf(info[1]);
@@ -113,6 +121,18 @@ public class ActDataManager {
                 log.error("用户id = " + userId + " ,活动id = " + actId + " 的活动数据数据库存储失败！！！ data = " + JSON.toJSONString(actVo));
             }
         }
+    }
 
+    public void saveToDbForCommonActData(int common_id, int actId) {
+        
+        String key = getActDataKey(common_id, actId);
+        AbstActVo actVo = actData.get(key);
+        if (actVo == null) {
+            return;
+        }
+        if (!(actVo instanceof CommonAbstActVo)) {
+            log.error("活动id = " + actId + " 不是共有的活动数据！！！");
+        }
+        CommonAbstActVo comAbstAct = (CommonAbstActVo)actVo;
     }
 }

@@ -34,7 +34,7 @@ public class RegisterProtoService {
 
     // 接收协议注册
     private void requestProtoLoad() {
-        request_proto_register(new ReqLoginProto((short) 0x001), GmState.GAME_OUT);
+        request_proto_register(new ReqLoginProto((short) 0x001), GmState.GAME_NOT);
     }
 
     // 发送协议注册

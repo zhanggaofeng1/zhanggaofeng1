@@ -4,7 +4,7 @@
  */
 package com.num.player.service;
 
-import com.num.player.dao.SavePlayerDao;
+import com.num.player.dao.PlayerDao;
 import com.num.player.vo.Player;
 import javolution.util.FastMap;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class PlayerService {
     @Autowired
     private ApplicationContext context;
     @Autowired
-    private SavePlayerDao savePlayerDao;
+    private PlayerDao savePlayerDao;
 
     public boolean addPlayer(Player player) {
         players.put(player.getId(), player);

@@ -6,9 +6,8 @@ package com.num.player.service;
 
 import com.num.enums.RespState;
 import com.num.mina.vo.GsSession;
+import com.num.player.dao.PlayerDao;
 import com.num.proto.service.SendMsgService;
-import com.num.player.vo.Player;
-import com.num.player.dao.LoadPlayerDao;
 import com.num.proto.resp.ResultState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,25 +23,23 @@ public class LoginService {
 
     private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     @Autowired
-    private LoadPlayerDao loadPlayerDao;
-    @Autowired
     private PlayerService playerService;
     @Autowired
     private SendMsgService sendService;
+    @Autowired
+    private PlayerDao playerDao;
 
-    public void playerLogin(GsSession gsSession, int playerId) {
+    public void savePlayer(GsSession gsSession, int playerId) {
 
-        Player player = loadPlayerDao.loadPlayer(playerId);
-        if (player == null) {
-            log.error("playerId = " + playerId + " 的用户还没有注册！！！");
-            sendService.sendMsg(gsSession, new ResultState(RespState.login_error.value()));
-            return;
-        }
+//        playerDao.savePlayer(null);
+        playerDao.loadPlayer();
+        log.error("playerId = " + playerId + " 的用户还没有注册！！！");
+        sendService.sendMsg(gsSession, new ResultState(RespState.login_error.value()));
         
-        gsSession.addPlayer(player);
-        player.setGsSession(gsSession);
-        
-        playerService.addPlayer(player);
-        sendService.sendMsg(gsSession, new ResultState(RespState.login_success.value()));
+//        gsSession.addPlayer(player);
+//        player.setGsSession(gsSession);
+//
+//        playerService.addPlayer(player);
+//        sendService.sendMsg(gsSession, new ResultState(RespState.login_success.value()));
     }
 }

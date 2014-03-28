@@ -2,8 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/F:/gitTest/zhanggaofeng1/ClientTest/nbproject/build-impl.xml</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/ClientTest/src/clienttest/GameHandlerService.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/ClientTest/src/clienttest/SendClass.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/ClientTest/src/clienttest/GameProtoDecoder.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/ClientTest/src/clienttest/GameProtoEncoder.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/ClientTest/src/clienttest/GameHandlerService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/ClientTest/src/clienttest/ClientTest.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/ClientTest/src/clienttest/SendClass.java</file>
     </open-files>
 </project-private>
