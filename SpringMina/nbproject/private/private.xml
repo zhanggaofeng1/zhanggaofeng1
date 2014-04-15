@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/player/dao/LoadPlayerDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/LoginService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/database_cfg.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/spring_context.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/common/daoUtils/NamedParameterDaoSupports.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/player/dao/PlayerDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/dao/ActDataDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/service/ActDataManager.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/TestCommonActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/AbstActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/CommonAbstActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoDecoder.java</file>
     </open-files>
 </project-private>

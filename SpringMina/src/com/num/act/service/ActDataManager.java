@@ -124,7 +124,7 @@ public class ActDataManager {
     }
 
     public void saveToDbForCommonActData(int common_id, int actId) {
-        
+
         String key = getActDataKey(common_id, actId);
         AbstActVo actVo = actData.get(key);
         if (actVo == null) {
@@ -132,7 +132,9 @@ public class ActDataManager {
         }
         if (!(actVo instanceof CommonAbstActVo)) {
             log.error("活动id = " + actId + " 不是共有的活动数据！！！");
+            return;
         }
-        CommonAbstActVo comAbstAct = (CommonAbstActVo)actVo;
+        CommonAbstActVo comAbstAct = (CommonAbstActVo) actVo;
+        comAbstAct.save(null);
     }
 }
