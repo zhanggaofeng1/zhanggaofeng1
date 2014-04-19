@@ -5,6 +5,7 @@
 package com.num.mina.handler;
 
 import com.num.act.service.PlayerActService;
+import com.num.mina.enums.GmState;
 import com.num.mina.vo.GsSession;
 import com.num.player.service.PlayerService;
 import com.num.player.vo.Player;
@@ -54,11 +55,20 @@ public class GameHandlerService extends IoHandlerAdapter {
 
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-        
+
         Player player = new GsSession(session).getPlayer();
         playerService.savePlayerInfo(player);
         session.close(true);
         log.error("用户id " + player.getPlayerId() + "EXCEPTION:" + cause.getMessage());
+    }
+
+    private GmState getGmState(IoSession session) {
+
+        Object obj = session.getAttribute("GmState");
+        if (obj == null) {
+            return GmState.GAME_NOT;
+        }
+        return (GmState) obj;
     }
 
     @Override
@@ -73,5 +83,6 @@ public class GameHandlerService extends IoHandlerAdapter {
         }
         reqProto.reader(buf);
         reqProto.req_handler();
+
     }
 }

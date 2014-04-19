@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+<<<<<<< HEAD
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/PlayerService.java</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/spring_mina_cfg.xml</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/act/service/PlayerActService.java</file>
@@ -15,5 +16,18 @@
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/ReqLoginProto.java</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/service/RegisterProtoService.java</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/service/SendMsgService.java</file>
+=======
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/LoginService.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/database_cfg.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/conf/spring_context.xml</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/common/daoUtils/NamedParameterDaoSupports.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/player/dao/PlayerDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/dao/ActDataDao.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/service/ActDataManager.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/TestCommonActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/AbstActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/CommonAbstActVo.java</file>
+        <file>file:/G:/GitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoDecoder.java</file>
+>>>>>>> adef7822e84eaca2c13e00675193c980c70d24ae
     </open-files>
 </project-private>

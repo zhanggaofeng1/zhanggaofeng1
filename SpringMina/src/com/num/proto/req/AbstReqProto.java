@@ -11,19 +11,19 @@ import org.springframework.context.ApplicationContext;
  *
  * @author Administrator
  */
-public abstract class AbstReqProto implements Cloneable{
+public abstract class AbstReqProto implements Cloneable {
 
     protected ApplicationContext context;
     private short protoId;
-    
+
     public AbstReqProto(short protoId) {
         this.protoId = protoId;
     }
-    
+
     public short getProtoId() {
         return protoId;
     }
-    
+
     public AbstReqProto clonePackage() {
         try {
             return (AbstReqProto) super.clone();
@@ -32,17 +32,26 @@ public abstract class AbstReqProto implements Cloneable{
             return null;
         }
     }
-    
+
     public void setApplicationContext(ApplicationContext context) {
         this.context = context;
     }
-    
+
+    public ApplicationContext getContext() {
+        return context;
+    }
+
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
+
     public void init() {
     }
-    
+
     public abstract void reader(IoBuffer buf);
+
     public abstract void req_handler();
-    
+
     protected int readInt(IoBuffer buf) {
         return buf.getInt();
     }

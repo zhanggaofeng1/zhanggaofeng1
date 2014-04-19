@@ -5,8 +5,10 @@
  */
 package com.num.proto.service;
 
+import com.num.mina.enums.GmState;
 import com.num.proto.req.AbstReqProto;
 import com.num.proto.req.ReqLoginProto;
+import com.num.proto.resp.AbstResp;
 import com.num.proto.resp.ResultState;
 import javax.annotation.PostConstruct;
 import javolution.util.FastMap;
@@ -25,7 +27,7 @@ public class RegisterProtoService {
     private ApplicationContext context;
     
     private final FastMap<Short, AbstReqProto> reqProMap = new FastMap<>(100);
-    private final FastMap<Class<?>, Short> respProMap = new FastMap<>(100);
+    private final FastMap<Class<? extends AbstResp>, Short> respProMap = new FastMap<>(100);
 
     @PostConstruct
     public void init() {
@@ -43,11 +45,9 @@ public class RegisterProtoService {
         return null;
     }
     
-    // 根据协议Class获取协议id
-    public Short getRespProtoIdByClazz(Class<?> clazz) {
+    public short getRespProtoIdByClazz(Class<?> clazz) {
         return respProMap.get(clazz);
     }
-    
 
     private void request_proto_rigister(AbstReqProto reqProto) {
         reqProto.setApplicationContext(context);

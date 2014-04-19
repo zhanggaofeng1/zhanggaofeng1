@@ -13,8 +13,8 @@ import org.apache.mina.core.buffer.IoBuffer;
  */
 public class ReqLoginProto extends AbstReqProto{
 
-    private int playerId;
     private LoginService loginService;
+    private int playerId;
     
     public ReqLoginProto(short protoId) {
         super(protoId);
@@ -32,7 +32,7 @@ public class ReqLoginProto extends AbstReqProto{
 
     @Override
     public void req_handler() {
-//        loginService.playerLogin(getGsSessioin(), playerId);
+
     }
     
 }

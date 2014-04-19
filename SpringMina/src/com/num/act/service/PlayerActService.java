@@ -10,7 +10,6 @@ import com.num.act.enums.ActIdEnum;
 import com.num.act.vo.CommonActVo;
 import com.num.act.vo.LoginActVo;
 import java.util.List;
-import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javolution.util.FastMap;
 import org.slf4j.Logger;
@@ -38,7 +37,7 @@ public class PlayerActService {
 
     @PostConstruct
     public void init() {
-        // 说动数据对象必须先注册
+        // 活动数据对象必须先注册
         actClass.put(ActIdEnum.login_act_id.value(), LoginActVo.class);
     }
 
@@ -111,6 +110,5 @@ public class PlayerActService {
                 log.error("用户id = " + userId + " ,活动id = " + actId + " 的活动数据数据库存储失败！！！ data = " + JSON.toJSONString(actVo));
             }
         }
-
     }
 }

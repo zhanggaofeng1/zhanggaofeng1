@@ -4,17 +4,28 @@
  */
 package com.num.player.vo;
 
+import com.num.mina.vo.GsSession;
+
 /**
  *
  * @author Administrator
  */
 public class Player {
 
+    private GsSession gsSession;
     private int id;
     private int playerId;
     private int playerName;
     private int playerLv;
     private int playerVip;
+    
+    public GsSession getGsSession() {
+        return gsSession;
+    }
+
+    public void setGsSession(GsSession gsSession) {
+        this.gsSession = gsSession;
+    }
     
     public int getId() {
         return id;
