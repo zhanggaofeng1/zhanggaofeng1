@@ -14,6 +14,16 @@ import org.apache.mina.core.buffer.IoBuffer;
 public class ReqLoginProto extends AbstReqProto{
 
     private int playerId;
+    private LoginService loginService;
+    
+    public ReqLoginProto(short protoId) {
+        super(protoId);
+    }
+    
+    @Override
+    public void init() {
+        loginService = context.getBean(LoginService.class);
+    }
     
     @Override
     public void reader(IoBuffer buf) {
@@ -22,8 +32,7 @@ public class ReqLoginProto extends AbstReqProto{
 
     @Override
     public void req_handler() {
-        LoginService loginService = getContext().getBean(LoginService.class);
-        loginService.playerLogin(getGsSessioin(), playerId);
+//        loginService.playerLogin(getGsSessioin(), playerId);
     }
     
 }

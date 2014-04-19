@@ -39,7 +39,6 @@ public class LoginService {
             return;
         }
         session.addPlayer(player);
-        playerService.addPlayer(player);
         sendService.sendMsg(session, new ResultState(RespState.login_success.value()));
     }
 }

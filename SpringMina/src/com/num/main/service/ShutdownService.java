@@ -4,7 +4,7 @@
  */
 package com.num.main.service;
 
-import com.num.act.service.ActDataManager;
+import com.num.act.service.PlayerActService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShutdownService {
     @Autowired
-    private ActDataManager actDataManager;
+    private PlayerActService actDataManager;
     
     public void shutdown() {
         actDataManager.saveToDbAllUserActInfo();

@@ -4,7 +4,7 @@
  */
 package com.num.mina.handler;
 
-import com.num.act.service.ActDataManager;
+import com.num.act.service.PlayerActService;
 import com.num.mina.vo.GsSession;
 import com.num.player.service.PlayerService;
 import com.num.player.vo.Player;
@@ -30,25 +30,11 @@ public class GameHandlerService extends IoHandlerAdapter {
     @Autowired
     private PlayerService playerService;
     @Autowired
-    private ActDataManager actManager;
+    private PlayerActService actManager;
 
     @Override
     public void sessionOpened(IoSession session) throws Exception {
         log.debug("############# session opened ###################");
-    }
-
-    @Override
-    public void sessionClosed(IoSession session) throws Exception {
-        try {
-            GsSession gsSession = new GsSession(session);
-            Player player = gsSession.getPlayer();
-            if (player != null) {
-                actManager.playerOffline(player);
-                playerService.removePlayer(player);
-            }
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
     }
 
     @Override
@@ -57,25 +43,22 @@ public class GameHandlerService extends IoHandlerAdapter {
     }
 
     @Override
-    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-        try {
-            GsSession gsSession = new GsSession(session);
-            Player player = gsSession.getPlayer();
-            if (player != null) {
-                actManager.playerOffline(player);
-                playerService.removePlayer(player);
-            }
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        } finally {
-            session.close(true);
-            cause.printStackTrace();
-        }
+    public void messageSent(IoSession session, Object message) throws Exception {
+        log.debug("#################信息发送成功之后调用###########################");
     }
 
     @Override
-    public void messageSent(IoSession session, Object message) throws Exception {
-        log.debug("#################信息发送成功之后调用###########################");
+    public void sessionClosed(IoSession session) throws Exception {
+        log.debug("################### 信息session关闭 ###############################");
+    }
+
+    @Override
+    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+        
+        Player player = new GsSession(session).getPlayer();
+        playerService.savePlayerInfo(player);
+        session.close(true);
+        log.error("用户id " + player.getPlayerId() + "EXCEPTION:" + cause.getMessage());
     }
 
     @Override
@@ -83,14 +66,12 @@ public class GameHandlerService extends IoHandlerAdapter {
 
         IoBuffer buf = (IoBuffer) message;
         short protoId = buf.getShort();
-        Class<? extends AbstReqProto> protoClazz = registerPtoService.getReqProtoById(protoId);
-        if (protoClazz == null) {
+        AbstReqProto reqProto = registerPtoService.getReqProtoById(protoId);
+        if (reqProto == null) {
             log.error("req : 协议id = " + protoId + " 的协议没有注册！");
             return;
         }
-        AbstReqProto proto = protoClazz.newInstance();
-        playerService.init(proto, session);
-        proto.reader(buf);
-        proto.req_handler();
+        reqProto.reader(buf);
+        reqProto.req_handler();
     }
 }

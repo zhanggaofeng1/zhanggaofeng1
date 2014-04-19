@@ -4,7 +4,6 @@
  */
 package com.num.proto.req;
 
-import com.num.mina.vo.GsSession;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.springframework.context.ApplicationContext;
 
@@ -12,26 +11,37 @@ import org.springframework.context.ApplicationContext;
  *
  * @author Administrator
  */
-public abstract class AbstReqProto {
+public abstract class AbstReqProto implements Cloneable{
 
-    private ApplicationContext context;
-    private GsSession session;
+    protected ApplicationContext context;
+    private short protoId;
     
-    public abstract void reader(IoBuffer buf);
-    public abstract void req_handler();
+    public AbstReqProto(short protoId) {
+        this.protoId = protoId;
+    }
     
-    public void init(GsSession session, ApplicationContext context) {
-        this.session = session;
+    public short getProtoId() {
+        return protoId;
+    }
+    
+    public AbstReqProto clonePackage() {
+        try {
+            return (AbstReqProto) super.clone();
+        } catch (CloneNotSupportedException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    public void setApplicationContext(ApplicationContext context) {
         this.context = context;
     }
     
-    public final GsSession getGsSessioin() {
-        return session;
+    public void init() {
     }
     
-    public final ApplicationContext getContext() {
-        return context;
-    }
+    public abstract void reader(IoBuffer buf);
+    public abstract void req_handler();
     
     protected int readInt(IoBuffer buf) {
         return buf.getInt();

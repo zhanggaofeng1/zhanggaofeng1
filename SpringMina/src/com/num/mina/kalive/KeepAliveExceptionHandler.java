@@ -27,12 +27,9 @@ public class KeepAliveExceptionHandler implements KeepAliveRequestTimeoutHandler
     @Override
     public void keepAliveRequestTimedOut(KeepAliveFilter kaf, IoSession session) throws Exception {
         
-        log.debug("#################### keep-alive timeout #################");
-        GsSession gsSession = new GsSession(session);
-        Player player = gsSession.getPlayer();
-        if (player != null) {
-            playerService.removePlayer(player);
-        }
+        Player player = new GsSession(session).getPlayer();
+        playerService.savePlayerInfo(player);
         session.close(true);
+        log.info("用户id = " + player.getPlayerId() + "  keep-alive timeout#####################");
     }
 }

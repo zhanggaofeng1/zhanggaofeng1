@@ -4,37 +4,49 @@
  */
 package com.num.act.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Administrator
  */
-public class LoginActVo extends AbstActVo {
+public class LoginActVo extends CommonActVo {
 
-    private int day;
-    private int count;
-    private String say = "Hello world";
+  private static final int version = 1;
+  private List<Integer> uids = new ArrayList<>();
 
-    public int getDay() {
-        return day;
+    public List<Integer> getUids() {
+        return uids;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setUids(List<Integer> uids) {
+        this.uids = uids;
     }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getSay() {
-        return say;
-    }
-
-    public void setSay(String say) {
-        this.say = say;
-    }
+  
+  @Override
+  public String getParamJson() {
+  
+      String json = version + ",";
+      for (int uid : uids) {
+          json += uid + ",";
+      }
+      return json;
+  }
+  
+  @Override
+  public void setParamJson(String json) {
+      String[] params = json.split(",");
+      if (1 == Integer.parseInt(params[0])) {
+          setParamJson1(params);
+      }
+  }
+  
+  private void setParamJson1(String[] params) {
+      
+      int len = params.length;
+      for (int i = 1; i < len; i++) {
+          uids.add(Integer.parseInt(params[i]));
+      }
+  }
 }

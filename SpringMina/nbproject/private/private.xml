@@ -2,14 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/tab/service/TabManagerService.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/spring_context.xml</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/main/GameService.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/codec/GameProtoDecoder.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/props/game_conf.properties</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/PlayerService.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/LoginService.java</file>
-        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/ReqLoginProto.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/conf/spring_mina_cfg.xml</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/act/service/PlayerActService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/act/dao/PlayerActDao.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/act/vo/CommonActVo.java</file>
         <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/handler/GameHandlerService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/dao/SavePlayerDao.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/mina/kalive/KeepAliveExceptionHandler.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/player/service/LoginService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/AbstReqProto.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/req/ReqLoginProto.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/service/RegisterProtoService.java</file>
+        <file>file:/F:/gitTest/zhanggaofeng1/SpringMina/src/com/num/proto/service/SendMsgService.java</file>
     </open-files>
 </project-private>

@@ -33,7 +33,6 @@ public class SendMsgService {
             }
         }
         resp.setProtoId(protoId);
-        
         session.sendMessage(resp);
     }
 }
